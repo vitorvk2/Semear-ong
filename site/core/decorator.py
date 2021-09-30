@@ -25,11 +25,11 @@ def validate_dataclass(dclass: Callable) -> Callable:
             try:
                 data = json.loads(request.body)
 
-                print(data)
+                print(dclass)
                 dclass(**data)
 
             except Exception:
-                raise JsonResponse(
+                return JsonResponse(
                     {
                         'success': False,
                         'msg': 'Dadly formatted or not allowed fields'
