@@ -24,8 +24,6 @@ def validate_dataclass(dclass: Callable) -> Callable:
         def wrap(request: HttpRequest, *args, **kwargs):
             try:
                 data = json.loads(request.body)
-
-                print(dclass)
                 dclass(**data)
 
             except Exception:
