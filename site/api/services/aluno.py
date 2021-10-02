@@ -27,19 +27,30 @@ def create_aluno(request: HttpRequest) -> JsonResponse:
             }, 
             status=422
         )
-    user = User(
-        username = data['username'],
-        nome = data['nome'],
-        cpf = data['cpf'],
-        data_nasc = data['data_nasc'],
-        endereco = data['endereco'],
-        bairro = data['bairro'],
-        cidade = data['cidade'],
-        numero = data['numero'],
-        uf = data['uf'],
-        cep = data['cep']
-    )
-    user.save()
+
+    try:
+        user = User(
+            username = data['username'],
+            nome = data['nome'],
+            cpf = data['cpf'],
+            data_nasc = data['data_nasc'],
+            endereco = data['endereco'],
+            bairro = data['bairro'],
+            cidade = data['cidade'],
+            numero = data['numero'],
+            uf = data['uf'],
+            cep = data['cep']
+        )
+        user.save()
+
+    except Exception:
+        return JsonResponse(
+            {
+                'success': False,
+                'msg': 'Username or CPF duplicate'
+            }, 
+            status=422
+        )
 
     aluno = Alunos(
         responsavel = responsavel,
@@ -63,13 +74,23 @@ def create_aluno(request: HttpRequest) -> JsonResponse:
 def create_responsavel(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body) 
 
-    responsavel = Responsavel(
-        nome = data['nome'],
-        cpf = data['cpf'],
-        data_nasc = data['data_nasc'],
-        tel = data['tel']
-    )
-    responsavel.save()
+    try:
+        responsavel = Responsavel(
+            nome = data['nome'],
+            cpf = data['cpf'],
+            data_nasc = data['data_nasc'],
+            tel = data['tel']
+        )
+        responsavel.save()
+
+    except Exception:
+        return JsonResponse(
+            {
+                'success': False,
+                'msg': 'CPF duplicate'
+            }, 
+            status=422
+        )
 
     return JsonResponse(
         {

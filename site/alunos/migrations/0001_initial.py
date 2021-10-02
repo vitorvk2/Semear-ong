@@ -16,6 +16,9 @@ class Migration(migrations.Migration):
             name='Responsavel',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('nome', models.CharField(max_length=200)),
+                ('cpf', models.CharField(max_length=15, unique=True)),
+                ('data_nasc', models.DateField()),
                 ('tel', models.CharField(max_length=15)),
                 ('created_at', models.DateTimeField(auto_now=True)),
                 ('deleted', models.IntegerField(default=0)),
