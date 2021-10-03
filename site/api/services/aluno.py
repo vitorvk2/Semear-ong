@@ -118,7 +118,7 @@ def get_aluno_by_id(request: HttpRequest, id: str) -> JsonResponse:
     return JsonResponse(
         {
             'success': True,
-            'chamada': aluno[0],
+            'chamada': aluno[0]
         }, 
         status=200
     )
@@ -126,117 +126,10 @@ def get_aluno_by_id(request: HttpRequest, id: str) -> JsonResponse:
 
 @csrf_exempt
 @require_http_methods(["GET"])
-def get_chamada(request: HttpRequest) -> JsonResponse:
-    chamada = Chamada.objects.filter(deleted=0).order_by("-id").values()[:30]
+def get_responsavel_by_id(request: HttpRequest, id: str) -> JsonResponse:
+    responsavel = Responsavel.objects.filter(id=id, deleted=0).values()
 
-    return JsonResponse(
-        {
-            'success': True,
-            'chamadas': list(chamada),
-        }, 
-        status=200
-    )
-
-
-@csrf_exempt
-@require_http_methods(["PUT"])
-#@validate_dataclass(chamada_update_dto.UpdateChamada)
-@has_data_body
-def update_chamada(request: HttpRequest) -> JsonResponse:
-    data = json.loads(request.body) 
-
-    chamada = Chamada.objects.filter(id=data['id'], deleted=0)
-
-    if not chamada.exists():
-        return JsonResponse(
-        {
-            'success': False,
-            'msg': 'Chamada does not exists'
-        }, 
-        status=200
-    )
-    
-    chamada.update(decricao=data['descricao'])
-
-    return JsonResponse(
-        {
-            'success': True,
-        }, 
-        status=200
-    )
-
-
-@csrf_exempt
-@require_http_methods(["DELETE"])
-#@validate_dataclass(chamada_delete_dto.DeleteChamada)
-@has_data_body
-def delete_chamada(request: HttpRequest) -> JsonResponse:
-    data = json.loads(request.body) 
-
-    chamada = Chamada.objects.filter(id=data['id'], deleted=0)
-
-    if not chamada.exists():
-        return JsonResponse(
-        {
-            'success': False,
-            'msg': 'Chamada does not exists'
-        }, 
-        status=200
-    )
-    
-    chamada.update(deleted=1)
-
-    return JsonResponse(
-        {
-            'success': True,
-        }, 
-        status=200
-    )
-
-
-@csrf_exempt
-@require_http_methods(["POST"])
-#@validate_dataclass(chamada_aluno_create_dto.CreateChamadaAluno)
-@has_data_body
-def create_chamada_aluno(request: HttpRequest) -> JsonResponse:
-    data = json.loads(request.body) 
-
-    try:
-        chamada = Chamada.objects.get(id=data['chamada_id'])
-        aluno = Alunos.objects.get(id=data['aluno_id'])
-
-    except (Oficinas.DoesNotExist, Alunos.DoesNotExist()):
-        return JsonResponse(
-            {
-                'success': False,
-                'msg': 'Chamada and/or Aluno does not exists'
-            }, 
-            status=422
-        )
-
-    chamada = ChamadaAluno(
-        chamada=chamada,
-        aluno=aluno,
-        presente=data['presente']
-    )
-
-    chamada.save()
-
-    return JsonResponse(
-        {
-            'success': True,
-            'id': chamada.id,
-        }, 
-        status=201
-    )
-
-
-@csrf_exempt
-@require_http_methods(["GET"])
-def get_chamada_aluno_by_id(request: HttpRequest, id: str) -> JsonResponse:
-    chamada = ChamadaAluno.objects.filter(id=id, deleted=0).values()
-
-    if not chamada.exists():
+    if not responsavel.exists():
         return JsonResponse(
             {
                 'success': False,
@@ -248,7 +141,7 @@ def get_chamada_aluno_by_id(request: HttpRequest, id: str) -> JsonResponse:
     return JsonResponse(
         {
             'success': True,
-            'chamada_aluno': chamada[0],
+            'chamada': responsavel[0]
         }, 
         status=200
     )
@@ -256,13 +149,79 @@ def get_chamada_aluno_by_id(request: HttpRequest, id: str) -> JsonResponse:
 
 @csrf_exempt
 @require_http_methods(["GET"])
-def get_chamada_aluno(request: HttpRequest) -> JsonResponse:
-    chamada = ChamadaAluno.objects.filter(deleted=0).order_by("-id").values()[:30]
+def get_aluno(request: HttpRequest) -> JsonResponse:
+    aluno = Alunos.objects.filter(deleted=0).order_by("-id").values()[:30]
 
     return JsonResponse(
         {
             'success': True,
-            'chamada_alunos': list(chamada),
+            'Alunos': list(aluno),
+        }, 
+        status=200
+    )
+
+
+@csrf_exempt
+@require_http_methods(["PUT"])
+@validate_dataclass(aluno_update_dto.UpdateAluno)
+@has_data_body
+def update_aluno(request: HttpRequest) -> JsonResponse:
+    data = json.loads(request.body) 
+
+    try:
+        aluno = Alunos.objects.filter(id=data['id'], deleted=0)
+
+    except Exception:
+        return JsonResponse(
+            {
+                'success': False,
+                'msg': 'aluno does not exists'
+            }, 
+            status=200
+        )
+
+    aluno.update(
+        data_nasc = data['data_nasc'],
+        endereco = data['endereco'],
+        bairro = data['bairro'],
+        cidade = data['cidade'],
+        numero = data['numero'],
+        uf = data['uf'],
+        cep = data['cep']
+    )
+
+    return JsonResponse(
+        {
+            'success': True,
+            'msg': 'dados atualizados'
+        }, 
+        status=200
+    )
+
+
+@csrf_exempt
+@require_http_methods(["DELETE"])
+@validate_dataclass(aluno_delete_dto.DeleteAluno)
+@has_data_body
+def delete_aluno(request: HttpRequest) -> JsonResponse:
+    data = json.loads(request.body) 
+
+    aluno = Alunos.objects.filter(id=data['id'], deleted=0)
+
+    if not aluno.exists():
+        return JsonResponse(
+        {
+            'success': False,
+            'msg': 'aluno does not exists'
+        }, 
+        status=200
+    )
+    
+    aluno.update(deleted=1)
+
+    return JsonResponse(
+        {
+            'success': True,
         }, 
         status=200
     )

@@ -1,6 +1,12 @@
 from dataclasses import dataclass
 
 @dataclass(frozen=True)
-class UpdateChamada:
+class UpdateAluno:
     id: int
-    descricao: str
+    data_nasc: str
+    endereco: str
+    bairro: str
+    cidade: str
+    numero: int
+    uf: str
+    cep: int
