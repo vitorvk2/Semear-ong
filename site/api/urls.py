@@ -16,8 +16,6 @@ urlpatterns = [
     path('chamadaaluno/create/', chamada.create_chamada_aluno),
     path('chamadaaluno/<str:id>/', chamada.get_chamada_aluno_by_id),
     path('chamadaaluno/', chamada.get_chamada_aluno),
-    path('chamadaaluno/<str:id>/', chamada.get_chamada_aluno_by_id),
-    path('chamadaaluno/', chamada.get_chamada_aluno),
 
     #! Oficina
 
