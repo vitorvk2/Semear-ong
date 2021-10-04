@@ -171,7 +171,7 @@ def update_aluno(request: HttpRequest) -> JsonResponse:
     try:
         aluno = Alunos.objects.filter(id=data['id'], deleted=0)
 
-    except Exception:
+    except Alunos.DoesNotExist:
         return JsonResponse(
             {
                 'success': False,
@@ -180,7 +180,8 @@ def update_aluno(request: HttpRequest) -> JsonResponse:
             status=200
         )
 
-    aluno.update(
+    try:
+        user = User(
         data_nasc = data['data_nasc'],
         endereco = data['endereco'],
         bairro = data['bairro'],
@@ -188,12 +189,27 @@ def update_aluno(request: HttpRequest) -> JsonResponse:
         numero = data['numero'],
         uf = data['uf'],
         cep = data['cep']
+        )
+        user.update()
+
+    except Exception:
+        return JsonResponse(
+            {
+                'success': False,
+                'msg': 'Erro!'
+            }, 
+            status=422
+        )
+
+    aluno = Alunos(
+        user = user
     )
+    aluno.update()
 
     return JsonResponse(
         {
             'success': True,
-            'msg': 'dados atualizados'
+            'msg': 'Dados atualizados'
         }, 
         status=200
     )
