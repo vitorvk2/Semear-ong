@@ -14,12 +14,12 @@ urlpatterns = [
     #! Chamada Aluno
 
     path('chamadaaluno/create/', chamada.create_chamada_aluno),
-    path('oficinaaluno/create/',oficinas.create_aluno_oficina),
-    path('oficinaaluno/<str:id>/',oficinas.get_oficina_aluno_by_id),
+    path('chamadaaluno/<str:id>/', chamada.get_chamada_aluno_by_id),
+    path('chamadaaluno/', chamada.get_chamada_aluno),
     path('chamadaaluno/<str:id>/', chamada.get_chamada_aluno_by_id),
     path('chamadaaluno/', chamada.get_chamada_aluno),
 
-    #! Chamada Oficina
+    #! Oficina
 
     path('oficinas/create/', oficinas.create_oficina),
     path('oficinas/update/',oficinas.update_oficina),
