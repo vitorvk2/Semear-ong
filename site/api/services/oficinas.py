@@ -102,11 +102,7 @@ def update_oficina(request: HttpRequest) -> JsonResponse:
         status=200
     )
     
-    oficina.update(nome=data['nome'])
-    oficina.update(decricao=data['descricao'])
-    oficina.update(horario=data['horario_aula'])
-    oficina.update(local=data['local'])
-    oficina.update(link=data['link'])
+    oficina.update(nome=data['nome'], decricao=data['descricao'] , horario=data['horario_aula'] , local=data['local'], link=data['link'])
 
     return JsonResponse(
         {
@@ -145,26 +141,26 @@ def delete_oficina(request: HttpRequest) -> JsonResponse:
 
 @csrf_exempt
 @require_http_methods(["POST"])
-@validate_dataclass(oficina_aluno_create_dto.CreateOficina)
+@validate_dataclass(oficina_aluno_create_dto.CreateOficinaAluno)
 @has_data_body
 def create_aluno_oficina(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body) 
 
     try:
-        orientador = Orientador.objects.get(id=data['orientador'])
         aluno = Alunos.objects.get(id=data['aluno_id'])
+        oficina = Oficinas.objects.get(id=data['oficina_id'])
 
-    except Orientador.DoesNotExist:
+    except (Alunos.DoesNotExist , Oficinas.DoesNotExist):
         return JsonResponse(
             {
                 'success': False,
-                'msg': 'Orientador and/or Aluno does not exists'
+                'msg': 'Oficina and/or Aluno does not exists'
             }, 
             status=422
         )
 
     oficina = OficinaAluno(
-        orientador=orientador,
+        oficina=oficina,
         aluno=aluno      
     )
 
