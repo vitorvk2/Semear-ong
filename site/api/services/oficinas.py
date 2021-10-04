@@ -1,13 +1,12 @@
+from api.dto.oficina import oficina_create_dto, oficina_aluno_create_dto, oficina_update_dto, oficina_delete_dto
 from django.views.decorators.http import require_http_methods
 from core.decorator import has_data_body, validate_dataclass
 from django.views.decorators.csrf import csrf_exempt
+from oficinas.models import Oficinas, OficinaAluno
 from django.http import JsonResponse, HttpRequest
-import json
-from api.dto.oficina import oficina_create_dto
 from orientador.models import Orientador
-from oficinas.models import Oficinas
 from alunos.models import Alunos
-
+import json
 
 
 @csrf_exempt
@@ -48,10 +47,11 @@ def create_oficina(request: HttpRequest) -> JsonResponse:
         status=201
     )
 
+
 @csrf_exempt
 @require_http_methods(["GET"])
 def get_oficina_by_id(request: HttpRequest, id: str) -> JsonResponse:
-    oficina = Oficina.objects.filter(id=id, deleted=0).values()
+    oficina = Oficinas.objects.filter(id=id, deleted=0).values()
 
     if not oficina.exists():
         return JsonResponse(
@@ -70,10 +70,11 @@ def get_oficina_by_id(request: HttpRequest, id: str) -> JsonResponse:
         status=200
     )
 
+
 @csrf_exempt
 @require_http_methods(["GET"])
 def get_oficina(request: HttpRequest) -> JsonResponse:
-    oficina = Oficina.objects.filter(deleted=0).order_by("-id").values()[:30]
+    oficina = Oficinas.objects.filter(deleted=0).order_by("-id").values()[:30]
 
     return JsonResponse(
         {
@@ -91,7 +92,7 @@ def get_oficina(request: HttpRequest) -> JsonResponse:
 def update_oficina(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body) 
 
-    oficina = Oficina.objects.filter(id=data['id'], deleted=0)
+    oficina = Oficinas.objects.filter(id=data['id'], deleted=0)
 
     if not oficina.exists():
         return JsonResponse(
@@ -102,7 +103,13 @@ def update_oficina(request: HttpRequest) -> JsonResponse:
         status=200
     )
     
-    oficina.update(nome=data['nome'], decricao=data['descricao'] , horario=data['horario_aula'] , local=data['local'], link=data['link'])
+    oficina.update(
+        nome=data['nome'], 
+        descricao=data['descricao'] , 
+        horario=data['horario_aula'] , 
+        local=data['local'], 
+        link=data['link']
+    )
 
     return JsonResponse(
         {
@@ -119,7 +126,7 @@ def update_oficina(request: HttpRequest) -> JsonResponse:
 def delete_oficina(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body) 
 
-    oficina = Oficina.objects.filter(id=data['id'], deleted=0)
+    oficina = Oficinas.objects.filter(id=data['id'], deleted=0)
 
     if not oficina.exists():
         return JsonResponse(
@@ -139,6 +146,7 @@ def delete_oficina(request: HttpRequest) -> JsonResponse:
         status=200
     )
 
+
 @csrf_exempt
 @require_http_methods(["POST"])
 @validate_dataclass(oficina_aluno_create_dto.CreateOficinaAluno)
@@ -150,7 +158,7 @@ def create_aluno_oficina(request: HttpRequest) -> JsonResponse:
         aluno = Alunos.objects.get(id=data['aluno_id'])
         oficina = Oficinas.objects.get(id=data['oficina_id'])
 
-    except (Alunos.DoesNotExist , Oficinas.DoesNotExist):
+    except (Alunos.DoesNotExist, Oficinas.DoesNotExist):
         return JsonResponse(
             {
                 'success': False,
@@ -174,6 +182,7 @@ def create_aluno_oficina(request: HttpRequest) -> JsonResponse:
         status=201
     )
 
+
 @csrf_exempt
 @require_http_methods(["GET"])
 def get_oficina_aluno_by_id(request: HttpRequest, id: str) -> JsonResponse:
@@ -195,9 +204,6 @@ def get_oficina_aluno_by_id(request: HttpRequest, id: str) -> JsonResponse:
         }, 
         status=200
     )
-
-
-
 
 
 @csrf_exempt
