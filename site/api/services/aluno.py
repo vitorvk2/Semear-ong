@@ -104,7 +104,22 @@ def create_responsavel(request: HttpRequest) -> JsonResponse:
 @csrf_exempt
 @require_http_methods(["GET"])
 def get_aluno_by_id(request: HttpRequest, id: str) -> JsonResponse:
-    aluno = Alunos.objects.filter(id=id, deleted=0).values()
+    aluno = Alunos.objects.filter(id=id, deleted=0).values(
+        "responsavel",
+        "created_at",
+        "deleted",
+        "user__id",
+        "user__nome",
+        "user__cpf",
+        "user__cep",
+        "user__cidade",
+        "user__endereco",
+        "user__bairro",
+        "user__numero",
+        "user__uf",
+        "user__cep",
+        "user__data_nasc",
+    )
 
     if not aluno.exists():
         return JsonResponse(
@@ -118,7 +133,7 @@ def get_aluno_by_id(request: HttpRequest, id: str) -> JsonResponse:
     return JsonResponse(
         {
             'success': True,
-            'chamada': aluno[0]
+            'aluno': aluno[0]
         }, 
         status=200
     )
@@ -141,7 +156,7 @@ def get_responsavel_by_id(request: HttpRequest, id: str) -> JsonResponse:
     return JsonResponse(
         {
             'success': True,
-            'chamada': responsavel[0]
+            'responsavel': responsavel[0]
         }, 
         status=200
     )
@@ -150,12 +165,27 @@ def get_responsavel_by_id(request: HttpRequest, id: str) -> JsonResponse:
 @csrf_exempt
 @require_http_methods(["GET"])
 def get_aluno(request: HttpRequest) -> JsonResponse:
-    aluno = Alunos.objects.filter(deleted=0).order_by("-id").values()[:30]
+    aluno = Alunos.objects.filter(deleted=0).order_by("-id").values(
+        "responsavel",
+        "created_at",
+        "deleted",
+        "user__id",
+        "user__nome",
+        "user__cpf",
+        "user__cep",
+        "user__cidade",
+        "user__endereco",
+        "user__bairro",
+        "user__numero",
+        "user__uf",
+        "user__cep",
+        "user__data_nasc",
+    )[:30]
 
     return JsonResponse(
         {
             'success': True,
-            'Alunos': list(aluno),
+            'alunos': list(aluno),
         }, 
         status=200
     )
@@ -169,47 +199,41 @@ def update_aluno(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body) 
 
     try:
-        aluno = Alunos.objects.filter(id=data['id'], deleted=0)
+        aluno = Alunos.objects.get(id=data['id'], deleted=0)
 
     except Alunos.DoesNotExist:
         return JsonResponse(
             {
                 'success': False,
-                'msg': 'aluno does not exists'
+                'msg': 'Aluno does not exists'
             }, 
             status=200
         )
 
     try:
-        user = User(
-        data_nasc = data['data_nasc'],
-        endereco = data['endereco'],
-        bairro = data['bairro'],
-        cidade = data['cidade'],
-        numero = data['numero'],
-        uf = data['uf'],
-        cep = data['cep']
+        User.objects.filter(id=aluno.user_id).update(
+            data_nasc = data['data_nasc'],
+            endereco = data['endereco'],
+            bairro = data['bairro'],
+            cidade = data['cidade'],
+            numero = data['numero'],
+            uf = data['uf'],
+            cep = data['cep']
         )
-        user.update()
 
     except Exception:
         return JsonResponse(
             {
                 'success': False,
-                'msg': 'Erro!'
+                'msg': 'Error'
             }, 
             status=422
         )
 
-    aluno = Alunos(
-        user = user
-    )
-    aluno.update()
-
     return JsonResponse(
         {
             'success': True,
-            'msg': 'Dados atualizados'
+            'msg': 'Updated data'
         }, 
         status=200
     )
@@ -228,7 +252,7 @@ def delete_aluno(request: HttpRequest) -> JsonResponse:
         return JsonResponse(
         {
             'success': False,
-            'msg': 'aluno does not exists'
+            'msg': 'Aluno does not exists'
         }, 
         status=200
     )
