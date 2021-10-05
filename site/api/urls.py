@@ -1,4 +1,4 @@
-from api.services import chamada, oficinas
+from api.services import chamada, oficinas, aluno
 from django.urls import path
 
 
@@ -17,6 +17,16 @@ urlpatterns = [
     path('chamadaaluno/<str:id>/', chamada.get_chamada_aluno_by_id),
     path('chamadaaluno/', chamada.get_chamada_aluno),
 
+    #! Aluno
+
+    path('aluno/create/', aluno.create_aluno),
+    path('aluno/update/', aluno.update_aluno),
+    path('aluno/delete/', aluno.delete_aluno),
+    path('responsavel/create/', aluno.create_responsavel),
+    path('responsavel/<str:id>/', aluno.get_responsavel_by_id),
+    path('aluno/<str:id>/', aluno.get_aluno_by_id),
+    path('aluno/', aluno.get_aluno),
+
     #! Oficina
 
     path('oficinas/create/', oficinas.create_oficina),
@@ -27,5 +37,4 @@ urlpatterns = [
     path('oficinasaluno/create/', oficinas.create_aluno_oficina),
     path('oficinasaluno/<str:id>/', oficinas.get_oficina_aluno_by_id),
     path('oficinasaluno/', oficinas.get_oficina_aluno),
-
 ]
