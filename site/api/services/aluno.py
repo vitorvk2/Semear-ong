@@ -1,6 +1,7 @@
 from api.dto.aluno import aluno_create_dto, aluno_update_dto, aluno_delete_dto
 from django.views.decorators.http import require_http_methods
 from core.decorator import has_data_body, validate_dataclass
+from django.contrib.auth.hashers import make_password
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpRequest
 from alunos.models import Alunos, Responsavel
@@ -33,6 +34,7 @@ def create_aluno(request: HttpRequest) -> JsonResponse:
             username = data['username'],
             nome = data['nome'],
             cpf = data['cpf'],
+            password = make_password(data['senha']),
             data_nasc = data['data_nasc'],
             endereco = data['endereco'],
             bairro = data['bairro'],
@@ -127,7 +129,7 @@ def get_aluno_by_id(request: HttpRequest, id: str) -> JsonResponse:
                 'success': False,
                 'msg': 'Id not found'
             }, 
-            status= 422
+            status=422
         )
 
     return JsonResponse(
@@ -150,7 +152,7 @@ def get_responsavel_by_id(request: HttpRequest, id: str) -> JsonResponse:
                 'success': False,
                 'msg': 'Id not found'
             }, 
-            status= 422
+            status=422
         )
 
     return JsonResponse(
@@ -207,7 +209,7 @@ def update_aluno(request: HttpRequest) -> JsonResponse:
                 'success': False,
                 'msg': 'Aluno does not exists'
             }, 
-            status=200
+            status=422
         )
 
     try:
@@ -254,7 +256,7 @@ def delete_aluno(request: HttpRequest) -> JsonResponse:
             'success': False,
             'msg': 'Aluno does not exists'
         }, 
-        status=200
+        status=422
     )
     
     aluno.update(deleted=1)

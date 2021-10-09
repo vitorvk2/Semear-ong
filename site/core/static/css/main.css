@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root {
+    --primary: #FFB703;
+    --second: #020129;
+    --third: #FB8500;
+    --detail: #999999;
+    --fail: #D81159;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body, html {
+    min-height: 100vh;
+}
+
+.red__text {
+    color: var(--fail);
+}
+
+.main__button {
+    cursor: pointer;
+    padding: 0 .75rem;
+    background-color: var(--primary);
+    border-radius: 6px;
+    height: 3rem;
+    border: none;
+    font-size: 1rem;
+    transition: 0.3s ease-in-out;
+}
+
+.main__button:focus {
+    background-color: var(--third);
+    
+}
+
+div.is__line {
+    width: 7px;
+    height: 100px;
+    background-color: var(--second);
+    position: absolute;
+    right: 1rem;
+    top: 0;
+    border-radius: 1rem;
+}
+
+div.grid__1 {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+div.grid__2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+div.grid__3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr, 1fr;
+}
+
+div.grid__4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr, 1fr, 1fr;
+}
+
+div.home__content {
+    padding: 1rem;
+    padding-left: 3rem;
+    position: relative;
+}
+
+div.home__content h1 {
+    font-size: 3.5rem;
+}
+
+p.sub {
+    font-size: 1rem;
+    color: var(--detail);
+}
+
+div.home__content .main__button {
+    margin-top: 6rem;
+}
+
+div.yellow__img {
+    background: var(--primary);
+    height: 100vh;
+    width: 50vw;
+}
+
+div.yellow__img div.image {
+    background-image: url('/static/img/family.jpg');
+    width: 100%;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    opacity: .15;
+}
+
+div.login__main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+div.login__main form {
+    width: 30vw;
+}
+
+input.input, select.input, textarea.input {
+    cursor: pointer;
+    border: 1px solid var(--second);
+    transition: .3s ease-in;
+    padding: .5rem;
+    height: 3rem;
+    color: var(--second);
+    margin-bottom: .75rem;
+    border-radius: 6px;
+}
+
+input.input:hover,
+select.input:hover, 
+textarea.input:hover,
+input.input:focus,
+select.input:focus, 
+textarea.input:focus {
+    border: 2px solid var(--second);
+}
+
+div.input__hero {
+    position: relative;
+}
+
+div.input__hero input, div.input__hero select, div.input__hero textarea {
+    width: 100%;
+}
+
+div.input__hero input:focus ~ label, div.input__hero input:not(:placeholder-shown) ~ label, 
+div.input__hero select:focus ~ label, div.input__hero select:not(:placeholder-shown) ~ label, 
+div.input__hero textarea:focus ~ label, div.input__hero textarea:not(:placeholder-shown) ~ label {
+    top: -0.5rem;
+    font-size: .75rem;
+    background-color: white;
+    padding: 0 .25rem;
+    font-weight: 600;
+    color: var(--second);
+}
+
+div.input__hero label {
+    position: absolute;
+    left: .5rem;
+    top: 17%;
+    color: var(--detail);
+    transition: 0.1s ease-in;
+}
+
+nav.menu {
+    width: 17vw;
+    height: 100vh;
+    background-color: var(--primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+nav.menu h1 {
+    font-size: 2rem;
+}
+
+nav.menu ul {
+    margin-top: 4rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+}
+
+nav.menu .is__line {
+    left: 1.4rem;
+    right: auto !important;
+    height: 100vh;
+}
+
+nav.menu ul li {
+    cursor: pointer;
+    list-style: none;
+    width: 100%;
+    transition: 0.2s ease-in;
+    line-height: 3rem;
+    padding-left: .5rem;
+    font-size: 1.3rem;
+}
+
+nav.menu ul li:hover {
+    background-color: var(--second);
+    color: white;
+    padding-left: 1.5rem;
+
+}
+
+nav.menu li.exit {
+    margin-top: auto;
+}

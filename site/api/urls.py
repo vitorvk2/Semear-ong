@@ -1,4 +1,5 @@
 from api.services import chamada, oficinas, aluno, orientador
+from . import views
 from django.urls import path
 
 
@@ -45,4 +46,8 @@ urlpatterns = [
     path('oficinasaluno/create/', oficinas.create_aluno_oficina),
     path('oficinasaluno/<str:id>/', oficinas.get_oficina_aluno_by_id),
     path('oficinasaluno/', oficinas.get_oficina_aluno),
+
+    #! usos gerais
+
+    path('login_interno/', views.make_login_interno),
 ]

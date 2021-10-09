@@ -5,6 +5,7 @@ class CreateOrientador:
     voluntario: bool
     username: str
     nome: str
+    senha: str
     cpf: str
     data_nasc: str
     endereco: str

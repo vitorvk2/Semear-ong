@@ -1,6 +1,7 @@
 from api.dto.orientador import orientador_create_dto, orientador_delete_dto, orientador_update_dto
 from django.views.decorators.http import require_http_methods
 from core.decorator import has_data_body, validate_dataclass
+from django.contrib.auth.hashers import make_password
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpRequest
 from orientador.models import Orientador
@@ -18,6 +19,7 @@ def create_orientador(request: HttpRequest) -> JsonResponse:
     try:
         user = User(
             username = data['username'],
+            password = make_password(data['senha']),
             nome = data['nome'],
             cpf = data['cpf'],
             data_nasc = data['data_nasc'],
@@ -81,7 +83,7 @@ def get_orientador_by_id(request: HttpRequest, id: str) -> JsonResponse:
                 'success': False,
                 'msg': 'Id not found'
             }, 
-            status= 422
+            status=422
         )
 
     return JsonResponse(
@@ -139,7 +141,7 @@ def update_orientador(request: HttpRequest) -> JsonResponse:
                 'success': False,
                 'msg': 'Orientador does not exists'
             }, 
-            status=200
+            status=422
         )
 
     try:
@@ -184,12 +186,12 @@ def delete_orientador(request: HttpRequest) -> JsonResponse:
 
     if not orientador.exists():
         return JsonResponse(
-        {
-            'success': False,
-            'msg': 'Orientador does not exists'
-        }, 
-        status=200
-    )
+            {
+                'success': False,
+                'msg': 'Orientador does not exists'
+            }, 
+            status=422
+        )
     
     orientador.update(deleted=1)
 

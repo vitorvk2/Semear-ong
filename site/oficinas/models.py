@@ -18,6 +18,7 @@ class Oficinas(models.Model):
     orientador = models.ForeignKey(Orientador, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now=True)
     deleted = models.IntegerField(default=0)
+    is_active = models.BooleanField(default=True)
 
 
 class OficinaImagem(models.Model):

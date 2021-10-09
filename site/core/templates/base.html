@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semear</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+    <div class="app">
+        <div class="is__line"></div>
+        <nav class="menu">
+            <div class="is__line"></div>
+            <h1>
+                Semear
+            </h1>
+            <ul>
+                <li>Oficinas</li>
+                <li>Alunos</li>
+                <li>Orientadores</li>
+                <li class="exit">Sair</li>
+            </ul> 
+        </nav>
+        <main>
+            asd
+            {% block app %}
+            {% endblock app %}
+        </main>
+    </div>
+
+    {% block script %}
+    {% endblock script %}
+</body>
+</html>
