@@ -9,14 +9,14 @@ urlpatterns = [
     path('chamada/create/', chamada.create_chamada),
     path('chamada/update/', chamada.update_chamada),
     path('chamada/delete/', chamada.delete_chamada),
-    path('chamada/<str:id>/', chamada.get_chamada_by_id),
-    path('chamada/', chamada.get_chamada),
+    path('chamada/<str:id_oficina>/<str:id>/', chamada.get_chamada_by_id),
+    path('chamada/<str:id_oficina>/', chamada.get_chamada),
 
     #! Chamada Aluno
 
     path('chamadaaluno/create/', chamada.create_chamada_aluno),
-    path('chamadaaluno/<str:id>/', chamada.get_chamada_aluno_by_id),
-    path('chamadaaluno/', chamada.get_chamada_aluno),
+    path('chamadaaluno/<str:id_chamada>/<str:id>/', chamada.get_chamada_aluno_by_id),
+    path('chamadaaluno/<str:id_chamada>/', chamada.get_chamada_aluno),
 
     #! Aluno
 
@@ -44,8 +44,8 @@ urlpatterns = [
     path('oficinas/<str:id>/', oficinas.get_oficina_by_id),
     path('oficinas/', oficinas.get_oficina),
     path('oficinasaluno/create/', oficinas.create_aluno_oficina),
-    path('oficinasaluno/<str:id>/', oficinas.get_oficina_aluno_by_id),
-    path('oficinasaluno/', oficinas.get_oficina_aluno),
+    path('oficinasaluno/<str:id_oficina>/<str:id>/', oficinas.get_oficina_aluno_by_id),
+    path('oficinasaluno/<str:id_oficina>/', oficinas.get_oficina_aluno),
 
     #! usos gerais
 

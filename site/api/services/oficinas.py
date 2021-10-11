@@ -51,7 +51,18 @@ def create_oficina(request: HttpRequest) -> JsonResponse:
 @csrf_exempt
 @require_http_methods(["GET"])
 def get_oficina_by_id(request: HttpRequest, id: str) -> JsonResponse:
-    oficina = Oficinas.objects.filter(id=id, deleted=0).values()
+    oficina = Oficinas.objects.filter(id=id, deleted=0).values(
+        "nome",
+        "id",
+        "descricao",
+        "local",
+        "link",
+        "horario",
+        "orientador__id",
+        "orientador__user__nome",
+        "created_at",
+        "is_active"
+    )
 
     if not oficina.exists():
         return JsonResponse(
@@ -74,7 +85,18 @@ def get_oficina_by_id(request: HttpRequest, id: str) -> JsonResponse:
 @csrf_exempt
 @require_http_methods(["GET"])
 def get_oficina(request: HttpRequest) -> JsonResponse:
-    oficina = Oficinas.objects.filter(deleted=0).order_by("-id").values()[:30]
+    oficina = Oficinas.objects.filter(deleted=0).order_by("-id").values(
+        "nome",
+        "id",
+        "descricao",
+        "local",
+        "link",
+        "horario",
+        "orientador__id",
+        "orientador__user__nome",
+        "created_at",
+        "is_active"
+    )[:30]
 
     return JsonResponse(
         {
@@ -208,8 +230,14 @@ def get_oficina_aluno_by_id(request: HttpRequest, id: str) -> JsonResponse:
 
 @csrf_exempt
 @require_http_methods(["GET"])
-def get_oficina_aluno(request: HttpRequest) -> JsonResponse:
-    oficina = OficinaAluno.objects.filter(deleted=0).order_by("-id").values()[:30]
+def get_oficina_aluno(request: HttpRequest, id_oficina: str) -> JsonResponse:
+    oficina = OficinaAluno.objects.filter(deleted=0, oficina_id=id_oficina).order_by("-id").values(
+        "id",
+        "oficina__nome",
+        "aluno__user__nome",
+        "aluno_id",
+        "created_at"
+    )[:30]
 
     return JsonResponse(
         {

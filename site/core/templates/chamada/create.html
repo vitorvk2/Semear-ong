@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block app %}
+    <input type="hidden" value="{{id}}" hidden id="uid">
+    <div class="tales">
+        <h1>Chamadas</h1>
+        <br>
+        <div class="actions">
+            <div></div>
+        </div>
+    </div>
+    <div class="content">
+        <form>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Aluno</td>
+                        <td>Falta</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <br>
+            <br>
+            <div class="input__hero">
+                <textarea id="desc" class="input" placeholder=" "></textarea>
+                <label for="desc">Descrição</label>
+            </div>
+            <br>
+            <button class="main__button" type="button" id="create">
+                Criar
+            </button>
+        </form>
+    </div>
+{% endblock app %}
+
+{% block script %}
+    <script src="/static/js/chamadas/chamadas_create.js"></script>
+{% endblock script %}

@@ -4,7 +4,7 @@ const request_auth = (url, type, data) => {
 
     return fetch(url, {
         method: type,
-        body: data,
+        body: JSON.stringify(data),
         headers: {
             'Authorization': `Bearer ${token}`,
             'validate': `Bearer ${validate}`,

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block app %}
+    <input type="hidden" value="{{id}}" hidden id="uid">
+    <div class="tales">
+        <h1>Lista de chamada</h1>
+        <br>
+    </div>
+    <div class="content">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Aluno</td>
+                    <td>Oficina</td>
+                    <td>Criado em</td>
+                    <td>Presente</td>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+{% endblock app %}
+
+{% block script %}
+    <script src="/static/js/chamadas/chamadas_listagem_aluno.js"></script>
+{% endblock script %}

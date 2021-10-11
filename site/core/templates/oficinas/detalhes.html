@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block app %}
+    <input type="hidden" value="{{id}}" hidden id="uid">
+    <div class="tales">
+        <h1><span class="detail">Oficina:</span> <span class="value__tales"></span></h1>
+        <br>
+    </div>
+    <div class="content">
+        <table>
+            <tr>
+                <td class="detail">Horário</td>
+                <td class="iftable infos__hour"></td>
+            </tr>
+            <tr>
+                <td class="detail">Link</td>
+                <td class="iftable infos__link"></td>
+            </tr>
+            <tr>
+                <td class="detail">Local</td>
+                <td class="iftable infos__location"></td>
+            </tr>
+            <tr>
+                <td class="detail">Orientador</td>
+                <td class="iftable infos__orie"></td>
+            </tr>
+            <tr>
+                <td class="detail">Criada em</td>
+                <td class="iftable infos__created"></td>
+            </tr>
+            <tr>
+                <td class="detail">Status</td>
+                <td class="iftable infos__status"></td>
+            </tr>
+            <tr>
+                <td class="detail">Chamadas</td>
+                <td class="iftable infos__chamada"><a href=""><button class="main__button">Chamadas</button></a></td>
+            </tr>
+            <tr>
+                <td class="detail">Descrição</td>
+                <td class="iftable infos__desc"></td>
+            </tr>
+        </table>
+    </div>
+{% endblock app %}
+
+{% block script %}
+    <script src="/static/js/oficinas/oficinas_detalhes.js"></script>
+{% endblock script %}

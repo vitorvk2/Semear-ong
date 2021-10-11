@@ -16,19 +16,21 @@
                 Semear
             </h1>
             <ul>
-                <li>Oficinas</li>
-                <li>Alunos</li>
-                <li>Orientadores</li>
+                <a href="/oficinas/list/">
+                    <li {% if active == 'oficinas' %}class="active"{% endif %}>Oficinas</li>
+                </a>
+                <li {% if active == 'alunos' %}class="active"{% endif %}>Alunos</li>
+                <li {% if active == 'orientadores' %}class="active"{% endif %}>Orientadores</li>
                 <li class="exit">Sair</li>
             </ul> 
         </nav>
         <main>
-            asd
             {% block app %}
             {% endblock app %}
         </main>
     </div>
 
+    <script src="/static/js/api_auth.js"></script>
     {% block script %}
     {% endblock script %}
 </body>

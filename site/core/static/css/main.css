@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css");
 
 :root {
     --primary: #FFB703;
@@ -24,6 +25,16 @@ body, html {
     color: var(--fail);
 }
 
+.detail {
+    color: var(--detail);
+}
+
+a {
+    color: var(--second);
+    text-decoration: none;
+    transition: .3s ease-in-out;
+}
+
 .main__button {
     cursor: pointer;
     padding: 0 .75rem;
@@ -37,7 +48,6 @@ body, html {
 
 .main__button:focus {
     background-color: var(--third);
-    
 }
 
 div.is__line {
@@ -62,12 +72,12 @@ div.grid__2 {
 
 div.grid__3 {
     display: grid;
-    grid-template-columns: 1fr 1fr, 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 div.grid__4 {
     display: grid;
-    grid-template-columns: 1fr 1fr, 1fr, 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 div.home__content {
@@ -116,6 +126,16 @@ div.login__main form {
     width: 30vw;
 }
 
+select.input {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 5rem;
+}
+
 input.input, select.input, textarea.input {
     cursor: pointer;
     border: 1px solid var(--second);
@@ -133,7 +153,7 @@ textarea.input:hover,
 input.input:focus,
 select.input:focus, 
 textarea.input:focus {
-    border: 2px solid var(--second);
+    box-shadow: inset 0px 0px 0px 1.5px var(--second);
 }
 
 div.input__hero {
@@ -172,7 +192,7 @@ nav.menu {
     align-items: center;
     padding-top: 1.5rem;
     padding-left: 1.5rem;
-    position: relative;
+    position: fixed;
 }
 
 nav.menu h1 {
@@ -203,13 +223,111 @@ nav.menu ul li {
     font-size: 1.3rem;
 }
 
+nav ul li.active {
+    background-color: var(--second);
+    color: white;
+    padding-left: 1.5rem;
+}
+
 nav.menu ul li:hover {
     background-color: var(--second);
     color: white;
     padding-left: 1.5rem;
-
 }
 
 nav.menu li.exit {
     margin-top: auto;
+}
+
+div.app {
+    display: flex;
+    flex-direction: row;
+}
+
+div.app main {
+    padding: 1.7rem;
+    width: 83vw;
+    margin-left: 17vw;
+}
+
+main div.actions {
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+}
+
+main div.actions div.input__hero {
+    width: 7rem;
+}
+
+main div.content {
+    margin-top: 2rem;
+}
+
+main div.content div.card__grid__list {
+    gap: .5rem;
+}
+
+div.card__grid {
+    background: var(--third);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+div.card__grid header.header__card__grid {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+    font-size: 1.125rem;
+}
+
+div.card__grid div.content__card__grid p {
+    line-height: .5;
+    font-size: .9rem;
+}
+
+div.card__grid div.content__card__grid span {
+    color: white;
+    line-height: .5;
+    font-size: .9rem;
+}
+
+div.tales span.detail {
+    color: var(--detail);
+}
+
+table tr, table td {
+    min-height: 40px;
+    line-height: 40px;
+}
+
+td.iftable {
+    padding-left: 3rem;
+}
+
+table.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table.table thead td {
+    font-weight: 600;
+    border-bottom: 1px solid var(--detail);
+
+}
+
+table.table td select {
+    background: none !important;
+}
+
+table.table td {
+    padding: .5rem;
+    border-left: 1px solid var(--detail);
+    border-right: 1px solid var(--detail);
+}
+
+table.table tr:nth-child(even) {
+    background-color: #e7e7e7;
 }

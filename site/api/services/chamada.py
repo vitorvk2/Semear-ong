@@ -46,8 +46,8 @@ def create_chamada(request: HttpRequest) -> JsonResponse:
 
 @csrf_exempt
 @require_http_methods(["GET"])
-def get_chamada_by_id(request: HttpRequest, id: str) -> JsonResponse:
-    chamada = Chamada.objects.filter(id=id, deleted=0).values()
+def get_chamada_by_id(request: HttpRequest, id_oficina: str, id: str) -> JsonResponse:
+    chamada = Chamada.objects.filter(id=id, oficina_id=id_oficina, deleted=0).values()
 
     if not chamada.exists():
         return JsonResponse(
@@ -69,8 +69,8 @@ def get_chamada_by_id(request: HttpRequest, id: str) -> JsonResponse:
 
 @csrf_exempt
 @require_http_methods(["GET"])
-def get_chamada(request: HttpRequest) -> JsonResponse:
-    chamada = Chamada.objects.filter(deleted=0).order_by("-id").values()[:30]
+def get_chamada(request: HttpRequest, id_oficina: str) -> JsonResponse:
+    chamada = Chamada.objects.filter(deleted=0, oficina_id=id_oficina).order_by("-id").values()[:30]
 
     return JsonResponse(
         {
@@ -176,8 +176,8 @@ def create_chamada_aluno(request: HttpRequest) -> JsonResponse:
 
 @csrf_exempt
 @require_http_methods(["GET"])
-def get_chamada_aluno_by_id(request: HttpRequest, id: str) -> JsonResponse:
-    chamada = ChamadaAluno.objects.filter(id=id, deleted=0).values()
+def get_chamada_aluno_by_id(request: HttpRequest, id_chamada: str, id: str) -> JsonResponse:
+    chamada = ChamadaAluno.objects.filter(id=id, chamada_id=id_chamada, deleted=0).values()
 
     if not chamada.exists():
         return JsonResponse(
@@ -199,8 +199,15 @@ def get_chamada_aluno_by_id(request: HttpRequest, id: str) -> JsonResponse:
 
 @csrf_exempt
 @require_http_methods(["GET"])
-def get_chamada_aluno(request: HttpRequest) -> JsonResponse:
-    chamada = ChamadaAluno.objects.filter(deleted=0).order_by("-id").values()[:30]
+def get_chamada_aluno(request: HttpRequest, id_chamada: str) -> JsonResponse:
+    chamada = ChamadaAluno.objects.filter(deleted=0, chamada_id=id_chamada).order_by("-id").values(
+        "id",
+        "chamada",
+        "chamada__oficina__nome",
+        "aluno__user__nome",
+        "presente",
+        "created_at",
+    )
 
     return JsonResponse(
         {
