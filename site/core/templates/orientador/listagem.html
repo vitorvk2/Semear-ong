@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block app %}
+    <div class="tales">
+        <h1>Orientador</h1>
+        <br>
+        <div class="actions">
+            <div></div>
+            <a href="/orientador/create/">
+                <button class="main__button">Criar</button>
+            </a>
+        </div>
+    </div>
+    <div class="content">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Nome</td>
+                    <td>Endereço</td>
+                    <td>Voluntário</td>
+                    <td>Criado em</td>
+                    <td>Ações</td>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+{% endblock app %}
+
+{% block script %}
+    <script src="/static/js/orientador/orientador_listagem.js"></script>  
+{% endblock script %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block app %}
+    <div class="tales">
+        <h1>Orientador</h1>
+        <br>
+        <div class="actions">
+            <div></div>
+        </div>
+    </div>
+    <div class="content">
+        <form>
+            <div class="grid__2">
+                <div class="input__hero">
+                    <input id="nome" class="input" placeholder=" ">
+                    <label for="nome">Nome</label>
+                </div>
+                <div class="input__hero">
+                    <input id="username" class="input" placeholder=" ">
+                    <label for="username">Usuário</label>
+                </div>
+            </div>
+            <div class="grid__2">
+                <div class="input__hero">
+                    <input id="cpf" class="input" placeholder=" ">
+                    <label for="cpf">CPF</label>
+                </div>
+                <div class="input__hero">
+                    <input type="date" id="dtnasc" class="input" placeholder=" ">
+                    <label for="dtnasc">Data Nascimento</label>
+                </div>
+            </div>
+            <br>
+            <button class="main__button" type="button" id="create">
+                Criar
+            </button>
+        </form>
+    </div>
+{% endblock app %}
+
+{% block script %}
+    <!-- <script src="/static/js/chamadas/chamadas_create.js"></script> -->
+{% endblock script %}
