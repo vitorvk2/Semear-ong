@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block app %}
+    <div class="tales">
+        <h1>Alunos</h1><br>
+        <a href="/alunos/create/"><button class="main__button">Criar</button></a>
+    </div>
+
+    <div class="content">
+        <div class="grid__3 card__grid__list"></div>
+    </div>
+{% endblock app %}
+
+{% block script %}
+    <script src="/static/js/aluno/aluno_listagem.js"></script>
+{% endblock script %}
