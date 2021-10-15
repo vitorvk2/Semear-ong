@@ -111,7 +111,7 @@ def get_aluno_by_id(request: HttpRequest, id: str) -> JsonResponse:
         "created_at",
         "deleted",
         "id",
-        "user__id"
+        "user__id",
         "user__nome",
         "user__cpf",
         "user__cep",
@@ -194,6 +194,7 @@ def get_aluno(request: HttpRequest) -> JsonResponse:
         "created_at",
         "deleted",
         "id",
+        "user__id",
         "user__nome",
         "user__cpf",
         "user__cep",
