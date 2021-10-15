@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% block app %}
-    <div class="tales">
+    <div class="tales" onload="buscarelemento(event, 1)">
         <h1>Alunos</h1><br>
         <div class="input__hero">
-            <select class="input" onclick="buscarelemento(event)">
+            <select class="input" onclick="buscarelemento(event, false)">
                 <option value="1" selected>Alunos</option>
                 <option value="0">Responsavel</option>
             </select>

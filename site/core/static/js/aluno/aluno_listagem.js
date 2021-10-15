@@ -44,7 +44,7 @@ const get_responsavel = () => {
                 let header = document.createElement("header")
                 header.className = "header__card__grid"
 
-                header.innerHTML = `<span><a href="/alunos/detailResp/${i.id}/">${i.nome}</a></span><i class="fas fa-pen"></i>`
+                header.innerHTML = `<span><a href="/alunos/detailresp/${i.id}/">${i.nome}</a></span><i class="fas fa-pen"></i>`
 
                 el.appendChild(header)
 
@@ -61,18 +61,19 @@ const get_responsavel = () => {
 }
 
 
-function buscarelemento(event) {
-    input = event.target.value;
-    let from = document.querySelector(".button_select")
+function buscarelemento(event, load) {
+    from = document.querySelector(".button_select")
+    if (load == 1){
+        input = 1
+    } else {
+        input = event.target.value;
+    }
 
     if (input == 1){
         from.innerHTML = `<a href="/alunos/create/"><button class="main__button">Criar Aluno</button></a>`
         get_alunos()
     } else {
-        from.innerHTML = `<a href="/responsavel/create/"><button class="main__button">Criar Responsavel</button></a>`
+        from.innerHTML = `<a href="/alunos/createresp/"><button class="main__button">Criar Responsavel</button></a>`
         get_responsavel()
     }
 }
-
-
-let input = 1

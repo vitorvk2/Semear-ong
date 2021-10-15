@@ -20,4 +20,6 @@ def detalhesResp(request: HttpRequest, id: str):
 def create(request: HttpRequest):
     return render(request, 'alunos/create.html', context={'active': 'alunos'})
 
-
+@is_authenticated
+def createResp(request: HttpRequest):
+    return render(request, 'alunos/createresp.html', context={'active': 'alunos'})
