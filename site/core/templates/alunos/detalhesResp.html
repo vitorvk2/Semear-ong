@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block app %}
+    <input type="hidden" value="{{id}}" hidden id="uid">
+    <div class="tales">
+        <h1><span class="detail">Responsáveis</span> <span class="value__tales"></span></h1>
+        <br>
+    </div>
+    <div class="content">
+        <table>
+            <tr>
+                <td class="detail">Nome</td>
+                <td class="iftable infos__nome"></td>
+            </tr>
+            <tr>
+                <td class="detail">CPF</td>
+                <td class="iftable infos__cpf"></td>
+            </tr>
+            <tr>
+                <td class="detail">Data Nascimento</td>
+                <td class="iftable infos__datanasc"></td>
+            </tr>
+            <tr>
+                <td class="detail">Número de Telefone</td>
+                <td class="iftable infos__tel"></td>
+            </tr>
+
+            
+
+        </table>
+    </div>
+{% endblock app %}
+
+{% block script %}
+    <script src="/static/js/aluno/responsavel_detalhes.js"></script>
+{% endblock script %}

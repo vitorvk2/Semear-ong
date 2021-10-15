@@ -24,6 +24,7 @@ urlpatterns = [
     path('aluno/update/', aluno.update_aluno),
     path('aluno/delete/', aluno.delete_aluno),
     path('responsavel/create/', aluno.create_responsavel),
+    path('responsavel/', aluno.get_responsavel),
     path('responsavel/<str:id>/', aluno.get_responsavel_by_id),
     path('aluno/<str:id>/', aluno.get_aluno_by_id),
     path('aluno/', aluno.get_aluno),

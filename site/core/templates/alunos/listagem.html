@@ -3,7 +3,14 @@
 {% block app %}
     <div class="tales">
         <h1>Alunos</h1><br>
-        <a href="/alunos/create/"><button class="main__button">Criar</button></a>
+        <div class="input__hero">
+            <select class="input" onclick="buscarelemento(event)">
+                <option value="1" selected>Alunos</option>
+                <option value="0">Responsavel</option>
+            </select>
+            <label for="user">Cadastros</label>
+        </div>
+        <a class="button_select"></a>
     </div>
 
     <div class="content">

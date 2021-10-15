@@ -110,7 +110,7 @@ def get_aluno_by_id(request: HttpRequest, id: str) -> JsonResponse:
         "responsavel",
         "created_at",
         "deleted",
-        "user__id",
+        "id",
         "user__nome",
         "user__cpf",
         "user__cep",
@@ -163,6 +163,27 @@ def get_responsavel_by_id(request: HttpRequest, id: str) -> JsonResponse:
         status=200
     )
 
+@csrf_exempt
+@require_http_methods(["GET"])
+def get_responsavel(request: HttpRequest) -> JsonResponse:
+    responsavel = Responsavel.objects.filter(deleted=0).order_by("-id").values(
+        "created_at",
+        "deleted",
+        "id",
+        "nome",
+        "cpf",
+        "data_nasc",
+        "tel"
+    )[:30]
+
+    return JsonResponse(
+        {
+            'success': True,
+            'Responsavel': list(responsavel),
+        }, 
+        status=200
+    )
+
 
 @csrf_exempt
 @require_http_methods(["GET"])
@@ -171,7 +192,7 @@ def get_aluno(request: HttpRequest) -> JsonResponse:
         "responsavel",
         "created_at",
         "deleted",
-        "user__id",
+        "id",
         "user__nome",
         "user__cpf",
         "user__cep",
