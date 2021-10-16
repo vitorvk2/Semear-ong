@@ -1,3 +1,12 @@
+<style>
+    #edit {
+        background-color: rgb(28, 117, 219);
+    }
+    #delete {
+        background-color: rgb(211, 35, 35);
+    }
+</style>
+
 {% extends 'base.html' %}
 
 {% block app %}
@@ -44,9 +53,14 @@
                 <td class="detail">CEP</td>
                 <td class="iftable infos__cep"></td>
             </tr>
-            
-
         </table>
+        <br>
+        <button class="main__button" type="button" id="edit">
+            Editar
+        </button>            
+        <button class="main__button" type="button" id="delete">
+            Deletar
+        </button>
     </div>
 {% endblock app %}
 

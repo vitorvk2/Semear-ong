@@ -16,3 +16,21 @@ const get_aluno = (id) => {
 
 const id = document.querySelector("#uid").value
 get_aluno(id)
+
+document.querySelector("#edit").addEventListener("click", () => {
+    alert('editar')
+
+
+})
+
+document.querySelector("#delete").addEventListener("click", () => {
+    if (confirm('Você realmente deseja excluir este aluno?')) {
+        // Try para insersão via API
+        request_auth(`/api/aluno/delete/`, "DELETE", {
+            "id": id
+        });
+        alert('Deletado com sucesso!')
+    } else {
+        return
+    }
+})

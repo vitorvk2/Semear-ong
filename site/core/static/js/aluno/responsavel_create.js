@@ -11,7 +11,7 @@ document.querySelector("#create").addEventListener("click", () => {
     let status = document.querySelector(".status");
     status.innerHTML = ''
     let res = request_auth(`/api/responsavel/create/`, "POST", data);
-    if (res.status == 200) {
+    if (res.status == 201) {
         status.innerHTML = '<a style="color:green">Cadastrado com sucesso!</a>'
     } else {
         status.innerHTML = '<a style="color:red">Erro! Revise os dados.</a>'

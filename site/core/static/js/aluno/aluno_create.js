@@ -33,7 +33,7 @@ document.querySelector("#create").addEventListener("click", () => {
 
     // Try para insersão via API
     let res = request_auth(`/api/aluno/create/`, "POST", data);
-    if (res.status == 200) {
+    if (res.status == 201) {
         status.innerHTML = '<a style="color:green">Cadastrado com sucesso!</a>'
         jumpScroll()
     } else {

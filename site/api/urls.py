@@ -23,11 +23,16 @@ urlpatterns = [
     path('aluno/create/', aluno.create_aluno),
     path('aluno/update/', aluno.update_aluno),
     path('aluno/delete/', aluno.delete_aluno),
-    path('responsavel/create/', aluno.create_responsavel),
-    path('responsavel/', aluno.get_responsavel),
-    path('responsavel/<str:id>/', aluno.get_responsavel_by_id),
     path('aluno/<str:id>/', aluno.get_aluno_by_id),
     path('aluno/', aluno.get_aluno),
+
+    #! Responsavel
+
+    path('responsavel/create/', aluno.create_responsavel),
+    path('responsavel/update/', aluno.update_responsavel),
+    path('responsavel/delete/', aluno.delete_responsavel),
+    path('responsavel/', aluno.get_responsavel),
+    path('responsavel/<str:id>/', aluno.get_responsavel_by_id),
 
     #! Orientador
 
