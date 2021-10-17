@@ -1,9 +1,12 @@
 <style>
-    #edit {
+    #edit, #cancel{
         background-color: rgb(28, 117, 219);
     }
     #delete {
         background-color: rgb(211, 35, 35);
+    }
+    #salve {
+        background-color: rgb(35, 211, 44);
     }
 </style>
 
@@ -13,10 +16,10 @@
     <input type="hidden" value="{{id}}" hidden id="uid">
     <div class="tales">
         <h1><span class="detail">Alunos</span> <span class="value__tales"></span></h1>
-        <br>
+        <br><div class="status"></div>
     </div>
     <div class="content">
-        <table>
+        <table >
             <tr>
                 <td class="detail">Nome</td>
                 <td class="iftable infos__nome"></td>
@@ -30,6 +33,10 @@
                 <td class="iftable infos__datanasc"></td>
             </tr>
             <tr>
+                <td class="detail">CEP</td>
+                <td class="iftable infos__cep"></td>
+            </tr>
+            <tr>
                 <td class="detail">Logradouro</td>
                 <td class="iftable infos__logra"></td>
             </tr>
@@ -39,7 +46,7 @@
             </tr>
             <tr>
                 <td class="detail">Bairro</td>
-                <td class="iftable infos__bairro">
+                <td class="iftable infos__bairro"></td>
             </tr>
             <tr>
                 <td class="detail">Cidade</td>
@@ -49,18 +56,25 @@
                 <td class="detail">UF</td>
                 <td class="iftable infos__uf"></td>
             </tr>
-            <tr>
-                <td class="detail">CEP</td>
-                <td class="iftable infos__cep"></td>
-            </tr>
         </table>
         <br>
-        <button class="main__button" type="button" id="edit">
-            Editar
-        </button>            
-        <button class="main__button" type="button" id="delete">
-            Deletar
-        </button>
+        <div class="edit_delet" style="display:none">
+            <button class="main__button" type="button" id="edit">
+                Editar
+            </button>            
+            <button class="main__button" type="button" id="delete">
+                Deletar
+            </button>
+        </div>
+        <div class="cancel_save" style="display:none">
+            <button class="main__button" type="button" id="cancel">
+                Cancelar
+            </button>            
+            <button class="main__button" type="button" id="salve">
+                Salvar
+            </button>
+        </div>
+
     </div>
 {% endblock app %}
 

@@ -12,13 +12,6 @@ const get_responsavel= (id) => {
 const id = document.querySelector("#uid").value
 get_responsavel(id)
 
-
-document.querySelector("#edit").addEventListener("click", () => {
-    alert('editar')
-
-
-})
-
 document.querySelector("#delete").addEventListener("click", () => {
     if (confirm('Você realmente deseja excluir este responsavel?')) {
         // Try para insersão via API
@@ -26,6 +19,7 @@ document.querySelector("#delete").addEventListener("click", () => {
             "id": id
         });
         alert('Deletado com sucesso!')
+        window.location.assign("/alunos/list/");
     } else {
         return
     }

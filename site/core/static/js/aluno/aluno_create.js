@@ -1,29 +1,28 @@
 const id = document.querySelector("#uid").value
 
 document.querySelector("#create").addEventListener("click", () => {
-    //Status e Iniciação par retorno
-    let status = document.querySelector(".status");
-    status.innerHTML = ''
+    //Iniciação par retorno
+    statuus.innerHTML = ''
 
     //Confirmação de Senha
     let senha = document.querySelector("form input[name=password]").value
     let senhaconf = document.querySelector("form input[name=confirmPassword]").value
     
     if (senha != senhaconf){
-        status.innerHTML = '<a style="color:red">Erro! Senhas não coincidem</a>'
+        statuus.innerHTML = '<a style="color:red">Erro! Senhas não coincidem.</a>'
         jumpScroll()
         return
     }     
-    
+
     //coleta de dados
     let data = {
         "responsavel": parseInt(document.querySelector("form input[name=responsavel]").value),
         "username": document.querySelector("form input[name=username]").value,
         "nome": document.querySelector("form input[name=nome]").value,
-        "cpf": document.querySelector("form input[name=cpf]").value,
+        "cpf": parseInt(document.querySelector("form input[name=cpf]").value),
         "data_nasc": document.querySelector("form input[name=data_nasc]").value,
         "senha": senhaconf,
-        "cep": parseInt(document.querySelector("form input[name=cep]").value),
+        "cep": document.querySelector("form input[name=cep]").value,
         "endereco": document.querySelector("form input[name=logradouro]").value,
         "numero": parseInt(document.querySelector("form input[name=numero]").value),
         "bairro": document.querySelector("form input[name=bairro]").value,
@@ -32,19 +31,18 @@ document.querySelector("#create").addEventListener("click", () => {
     }
 
     // Try para insersão via API
-    let res = request_auth(`/api/aluno/create/`, "POST", data);
-    if (res.status == 201) {
-        status.innerHTML = '<a style="color:green">Cadastrado com sucesso!</a>'
+    let response = request_auth(`/api/aluno/create/`, "POST", data);
+    if (response.status == 201 || response.status == 200) {
+        statuus.innerHTML = '<a style="color:green">Cadastrado com sucesso!</a>'
         jumpScroll()
     } else {
-        status.innerHTML = '<a style="color:red">Erro! Revise os dados.</a>'
+        statuus.innerHTML = '<a style="color:red">Erro! Revise os dados.</a>'
         jumpScroll()
     }
 })
 
 // Função via CEP
 async function buscarCep(event) {
-    let cont = 0;
     let input = event.target.value;
     let cep = input.match(/\d+/g).join('');
 
@@ -75,3 +73,6 @@ async function buscarCep(event) {
 function jumpScroll() {
     window.scrollTo(0, 0);
 }
+
+//Main
+let statuus = document.querySelector(".status");

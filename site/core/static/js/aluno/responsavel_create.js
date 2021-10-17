@@ -8,12 +8,13 @@ document.querySelector("#create").addEventListener("click", () => {
         "tel": document.querySelector("form input[name=numero]").value,
     }
 
-    let status = document.querySelector(".status");
-    status.innerHTML = ''
-    let res = request_auth(`/api/responsavel/create/`, "POST", data);
-    if (res.status == 201) {
-        status.innerHTML = '<a style="color:green">Cadastrado com sucesso!</a>'
+    let statuus = document.querySelector(".status");
+    statuus.innerHTML = ''
+
+    let response = request_auth(`/api/responsavel/create/`, "POST", data);
+    if (response.status == 201 || response.status == 200) {
+        statuus.innerHTML = '<a style="color:green">Cadastrado com sucesso!</a>'
     } else {
-        status.innerHTML = '<a style="color:red">Erro! Revise os dados.</a>'
+        statuus.innerHTML = '<a style="color:red">Erro! Revise os dados.</a>'
     }
 })
