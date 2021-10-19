@@ -10,11 +10,12 @@ document.querySelector("#create").addEventListener("click", () => {
 
     let statuus = document.querySelector(".status");
     statuus.innerHTML = ''
-
     let response = request_auth(`/api/responsavel/create/`, "POST", data);
+    console.log(response.status)
     if (response.status == 201 || response.status == 200) {
         statuus.innerHTML = '<a style="color:green">Cadastrado com sucesso!</a>'
     } else {
         statuus.innerHTML = '<a style="color:red">Erro! Revise os dados.</a>'
     }
+    
 })
