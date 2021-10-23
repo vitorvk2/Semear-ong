@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block app %}
+    <div class="tales">
+        <h1>Orientador</h1>
+        <br>
+        <div class="actions">
+            <div></div>
+        </div>
+    </div>
+    <div class="content">
+        <form>
+            <div class="grid__2">
+                <div class="input__hero">
+                    <input id="nome" class="input" placeholder=" ">
+                    <label for="nome">Nome</label>
+                </div>
+                <div class="input__hero">
+                    <input id="username" class="input" placeholder=" ">
+                    <label for="username">Usuário</label>
+                </div>
+            </div>
+            <div class="grid__2">
+                <div class="input__hero">
+                    <input id="cpf" class="input" placeholder=" ">
+                    <label for="cpf">CPF</label>
+                </div>
+                <div class="input__hero">
+                    <input type="date" id="dtnasc" class="input" placeholder=" ">
+                    <label for="dtnasc">Data Nascimento</label>
+                </div>
+            </div>
+            <div class="grid__2">
+                <div class="input__hero">
+                    <input type="number" id="cep" class="input" placeholder=" ">
+                    <label for="cep">Cep</label>
+                </div>
+                <div class="input__hero">
+                    <input id="endereco" class="input" placeholder=" ">
+                    <label for="endereço">Endereço</label>
+                </div>
+            </div>
+            <div class="grid__2">
+                <div class="input__hero">
+                    <input id="cidade" class="input" placeholder=" ">
+                    <label for="cidade">Cidade</label>
+                </div>
+                <div class="input__hero">
+                    <input type="number" id="numero" class="input" placeholder=" ">
+                    <label for="numero">Número</label>
+                </div>
+            </div>
+            <div class="grid__2">
+                <div class="input__hero">
+                    <select id="uf" class="input" placeholder=" ">
+                        <option value="SP">São Paulo</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                    </select>
+                    <label for="uf">UF</label>
+                </div>
+                <div class="input__hero">
+                    <input id="bairro" class="input" placeholder=" ">
+                    <label for="bairro">Bairro</label>
+                </div>
+            </div>
+            <div class="grid__2">
+                <div class="input__hero">
+                    <input type="checkbox" id="voluntario" class="input" placeholder=" ">
+                    <label for="voluntario">Voluntário</label>
+                </div>
+                <div class="input__hero">
+                    <input type="password" id="senha" class="input" placeholder=" ">
+                    <label for="senha">Senha</label>
+                </div>
+            </div>
+            <br>
+            <p id="error" class="red__text">
+                
+            </p>
+            <button class="main__button" type="button" id="create">
+                Criar
+            </button>
+        </form>
+    </div>
+{% endblock app %}
+
+{% block script %}
+    <script src="/static/js/orientador/orientador_create.js"></script> 
+{% endblock script %}
