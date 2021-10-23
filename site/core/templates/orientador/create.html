@@ -32,45 +32,51 @@
             </div>
             <div class="grid__2">
                 <div class="input__hero">
-                    <input id="endereço" class="input" placeholder=" ">
-                    <label for="Endereço">Endereço</label>
+                    <input type="number" id="cep" class="input" placeholder=" ">
+                    <label for="cep">Cep</label>
                 </div>
                 <div class="input__hero">
-                    <input id="bairro" class="input" placeholder=" ">
-                    <label for="Bairro">Bairro</label>
+                    <input id="endereco" class="input" placeholder=" ">
+                    <label for="endereço">Endereço</label>
                 </div>
             </div>
             <div class="grid__2">
                 <div class="input__hero">
                     <input id="cidade" class="input" placeholder=" ">
-                    <label for="Cidade">Cidade</label>
+                    <label for="cidade">Cidade</label>
                 </div>
                 <div class="input__hero">
-                    <input type="number" class="input" placeholder=" ">
-                    <label for="Numero">Número</label>
-                </div>
-            </div>
-            <div class="grid__2">
-                <div class="input__hero">
-                    <input id="uf" class="input" placeholder=" ">
-                    <label for="UF">UF</label>
-                </div>
-                <div class="input__hero">
-                    <input type="number" class="input" placeholder=" ">
-                    <label for="Cep">Cep</label>
+                    <input type="number" id="numero" class="input" placeholder=" ">
+                    <label for="numero">Número</label>
                 </div>
             </div>
             <div class="grid__2">
                 <div class="input__hero">
-                    <input type="checkbox" class="input" placeholder=" ">
-                    <label for="Voluntário">Voluntário</label>
+                    <select id="uf" class="input" placeholder=" ">
+                        <option value="SP">São Paulo</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                    </select>
+                    <label for="uf">UF</label>
                 </div>
                 <div class="input__hero">
-                    <input type="password" class="input" placeholder=" ">
-                    <label for="Senha">Senha</label>
+                    <input id="bairro" class="input" placeholder=" ">
+                    <label for="bairro">Bairro</label>
+                </div>
+            </div>
+            <div class="grid__2">
+                <div class="input__hero">
+                    <input type="checkbox" id="voluntario" class="input" placeholder=" ">
+                    <label for="voluntario">Voluntário</label>
+                </div>
+                <div class="input__hero">
+                    <input type="password" id="senha" class="input" placeholder=" ">
+                    <label for="senha">Senha</label>
                 </div>
             </div>
             <br>
+            <p id="error" class="red__text">
+                
+            </p>
             <button class="main__button" type="button" id="create">
                 Criar
             </button>
@@ -79,5 +85,5 @@
 {% endblock app %}
 
 {% block script %}
-    <!-- <script src="/static/js/chamadas/chamadas_create.js"></script> -->
+    <script src="/static/js/orientador/orientador_create.js"></script> 
 {% endblock script %}
