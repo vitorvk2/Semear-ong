@@ -1,6 +1,6 @@
 from api.dto.chamada import chamada_create_dto, chamada_update_dto, chamada_delete_dto, chamada_aluno_create_dto
+from core.decorator import has_data_body, validate_dataclass, is_api_authenticated
 from django.views.decorators.http import require_http_methods
-from core.decorator import has_data_body, validate_dataclass
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpRequest
 from chamada.models import Chamada, ChamadaAluno
@@ -13,11 +13,16 @@ import json
 @require_http_methods(["POST"])
 @validate_dataclass(chamada_create_dto.CreateChamada)
 @has_data_body
+@is_api_authenticated
 def create_chamada(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body) 
 
     try:
-        oficina = Oficinas.objects.get(id=data['oficina'])
+        if request.is_admin:
+            oficina = Oficinas.objects.get(id=data['oficina'])
+        
+        else:
+            oficina = Oficinas.objects.get(id=data['oficina'], orientador_id=request.id_user)
 
     except Oficinas.DoesNotExist:
         return JsonResponse(
@@ -46,8 +51,13 @@ def create_chamada(request: HttpRequest) -> JsonResponse:
 
 @csrf_exempt
 @require_http_methods(["GET"])
+@is_api_authenticated
 def get_chamada_by_id(request: HttpRequest, id_oficina: str, id: str) -> JsonResponse:
-    chamada = Chamada.objects.filter(id=id, oficina_id=id_oficina, deleted=0).values()
+    if request.is_admin:
+        chamada = Chamada.objects.filter(id=id, oficina_id=id_oficina, deleted=0).values()
+    
+    else:
+        chamada = Chamada.objects.filter(id=id, oficina_id=id_oficina, deleted=0, oficina__orientador_id=request.id_user).values()
 
     if not chamada.exists():
         return JsonResponse(
@@ -69,8 +79,13 @@ def get_chamada_by_id(request: HttpRequest, id_oficina: str, id: str) -> JsonRes
 
 @csrf_exempt
 @require_http_methods(["GET"])
+@is_api_authenticated
 def get_chamada(request: HttpRequest, id_oficina: str) -> JsonResponse:
-    chamada = Chamada.objects.filter(deleted=0, oficina_id=id_oficina).order_by("-id").values()[:30]
+    if request.is_admin:
+        chamada = Chamada.objects.filter(deleted=0, oficina_id=id_oficina).order_by("-id").values()[:30]
+    
+    else:
+        chamada = Chamada.objects.filter(deleted=0, oficina_id=id_oficina, oficina__orientador_id=request.id_user).order_by("-id").values()[:30]
 
     return JsonResponse(
         {
@@ -85,10 +100,15 @@ def get_chamada(request: HttpRequest, id_oficina: str) -> JsonResponse:
 @require_http_methods(["PUT"])
 @validate_dataclass(chamada_update_dto.UpdateChamada)
 @has_data_body
+@is_api_authenticated
 def update_chamada(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body) 
 
-    chamada = Chamada.objects.filter(id=data['id'], deleted=0)
+    if request.is_admin:
+        chamada = Chamada.objects.filter(id=data['id'], deleted=0)
+
+    else:
+        chamada = Chamada.objects.filter(id=data['id'], deleted=0, oficina__orientador_id=request.id_user)
 
     if not chamada.exists():
         return JsonResponse(
@@ -113,10 +133,15 @@ def update_chamada(request: HttpRequest) -> JsonResponse:
 @require_http_methods(["DELETE"])
 @validate_dataclass(chamada_delete_dto.DeleteChamada)
 @has_data_body
+@is_api_authenticated
 def delete_chamada(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body) 
 
-    chamada = Chamada.objects.filter(id=data['id'], deleted=0)
+    if request.is_admin:
+        chamada = Chamada.objects.filter(id=data['id'], deleted=0)
+
+    else:
+        chamada = Chamada.objects.filter(id=data['id'], deleted=0, oficina__orientador_id=request.id_user)
 
     if not chamada.exists():
         return JsonResponse(
@@ -141,14 +166,20 @@ def delete_chamada(request: HttpRequest) -> JsonResponse:
 @require_http_methods(["POST"])
 @validate_dataclass(chamada_aluno_create_dto.CreateChamadaAluno)
 @has_data_body
+@is_api_authenticated
 def create_chamada_aluno(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body) 
 
     try:
-        chamada = Chamada.objects.get(id=data['chamada_id'])
+        if request.is_admin:
+            chamada = Chamada.objects.get(id=data['chamada_id'])
+
+        else:
+            chamada = Chamada.objects.get(id=data['chamada_id'], oficina__orientador_id=request.id_user)
+
         aluno = Alunos.objects.get(id=data['aluno_id'])
 
-    except (Oficinas.DoesNotExist, Alunos.DoesNotExist()):
+    except (Chamada.DoesNotExist, Alunos.DoesNotExist):
         return JsonResponse(
             {
                 'success': False,
@@ -176,6 +207,7 @@ def create_chamada_aluno(request: HttpRequest) -> JsonResponse:
 
 @csrf_exempt
 @require_http_methods(["GET"])
+@is_api_authenticated
 def get_chamada_aluno_by_id(request: HttpRequest, id_chamada: str, id: str) -> JsonResponse:
     chamada = ChamadaAluno.objects.filter(id=id, chamada_id=id_chamada, deleted=0).values()
 
@@ -199,6 +231,7 @@ def get_chamada_aluno_by_id(request: HttpRequest, id_chamada: str, id: str) -> J
 
 @csrf_exempt
 @require_http_methods(["GET"])
+@is_api_authenticated
 def get_chamada_aluno(request: HttpRequest, id_chamada: str) -> JsonResponse:
     chamada = ChamadaAluno.objects.filter(deleted=0, chamada_id=id_chamada).order_by("-id").values(
         "id",
