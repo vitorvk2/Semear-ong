@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block app %}
+    <input type="hidden" value="{{id}}" hidden id="uid">
+    <div class="tales">
+        <h1><span class="detail">Alunos:</span> <span class="value__tales"></span></h1>
+        <br>
+    </div>
+    <div class="content">
+        <table>
+            <tr>
+                <td class="detail">Nome</td>
+                <td class="iftable infos__nome"></td>
+            </tr>
+            <tr>
+                <td class="detail">CPF</td>
+                <td class="iftable infos__cpf"></td>
+            </tr>
+            <tr>
+                <td class="detail">Data Nascimento</td>
+                <td class="iftable infos__datanasc"></td>
+            </tr>
+            <tr>
+                <td class="detail">Logradouro</td>
+                <td class="iftable infos__logra"></td>
+            </tr>
+            <tr>
+                <td class="detail">Numero</td>
+                <td class="iftable infos__num"></td>
+            </tr>
+            <tr>
+                <td class="detail">Bairro</td>
+                <td class="iftable infos__bairro">
+            </tr>
+            <tr>
+                <td class="detail">Cidade</td>
+                <td class="iftable infos__cidade"></td>
+            </tr>
+            <tr>
+                <td class="detail">UF</td>
+                <td class="iftable infos__uf"></td>
+            </tr>
+            <tr>
+                <td class="detail">CEP</td>
+                <td class="iftable infos__cep"></td>
+            </tr>
+            
+
+        </table>
+    </div>
+{% endblock app %}
+
+{% block script %}
+    <script src="/static/js/aluno/aluno_detalhes.js"></script>
+{% endblock script %}

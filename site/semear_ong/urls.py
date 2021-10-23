@@ -6,4 +6,5 @@ urlpatterns = [
     path('oficinas/', include('oficinas.urls')),
     path('chamada/', include('chamada.urls')),
     path('orientador/', include('orientador.urls')),
+    path('alunos/', include('alunos.urls')),
 ]
