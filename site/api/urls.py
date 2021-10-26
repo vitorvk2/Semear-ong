@@ -49,6 +49,7 @@ urlpatterns = [
     path('oficinas/delete/', oficinas.delete_oficina),
     path('oficinas/<str:id>/', oficinas.get_oficina_by_id),
     path('oficinas/', oficinas.get_oficina),
+    path('oficinasfive/', oficinas.get_five_oficina),
     path('oficinasaluno/create/', oficinas.create_aluno_oficina),
     path('oficinasaluno/<str:id_oficina>/<str:id>/', oficinas.get_oficina_aluno_by_id),
     path('oficinasaluno/<str:id_oficina>/', oficinas.get_oficina_aluno),

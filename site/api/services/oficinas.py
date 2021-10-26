@@ -246,3 +246,23 @@ def get_oficina_aluno(request: HttpRequest, id_oficina: str) -> JsonResponse:
         }, 
         status=200
     )
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def get_five_oficina(request: HttpRequest) -> JsonResponse:
+    oficina = Oficinas.objects.filter(deleted=0).order_by("-id").values(
+        "nome",
+        "id",
+        "descricao",
+        "orientador__user__nome",
+        "created_at",
+        "is_active"
+    )[:5]
+
+    return JsonResponse(
+        {
+            'success': True,
+            'oficina': list(oficina),
+        }, 
+        status=200
+    )
