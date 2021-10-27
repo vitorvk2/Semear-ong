@@ -106,13 +106,19 @@ div.yellow__img {
     width: 50vw;
 }
 
-div.yellow__img div.image {
-    background-image: url('/static/img/family.jpg');
+div.base_img_index {
+    height: 100vh;
+    width: 50vw;
+}
+
+div.base_img_index div.yellow_image {
+    background-image: url('/static/img/familyorange.jpg');
     width: 100%;
     height: 100vh;
     background-position: center;
     background-size: cover;
-    opacity: .15;
+    opacity: .70;
+    position: fixed;
 }
 
 div.login__main {
