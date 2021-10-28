@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block app %}
+    <div class="tales">
+        <h1>Oficinas</h1>
+        <br>
+        <div class="actions">
+            <div></div>
+        </div>
+    </div>
+    <div class="content">
+        <form>
+            <div class="grid__2">
+                <div class="input__hero">
+                    <input id="nome" class="input" placeholder=" ">
+                    <label for="nome">Nome</label>
+                </div>
+                <div class="input__hero">
+                    <input id="horario" class="input" type="time" placeholder=" ">
+                    <label for="horario">Horário Aula</label>
+                </div>
+            </div>
+            <div class="grid__2">
+                <div class="input__hero">
+                    <input id="orientador" class="input" placeholder=" ">
+                    <label for="orientador">Orientador Id</label>
+                </div>
+                <div class="input__hero">
+                    <input id="local"  class="input" placeholder=" ">
+                    <label for="local">Local</label>
+                </div>
+            </div>
+            <div class="grid__2">
+                <div class="input__hero">
+                    <input type="url" id="link" class="input" placeholder=" ">
+                    <label for="link">Link</label>
+                </div>
+            </div>
+            <div class="grid__1">
+                <div class="input__hero">
+                    <textarea id="descricao" placeholder=" " class="input"></textarea>
+                    <label for="descricao">Descrição</label>
+                </div>
+            </div>
+            <br>
+            <p id="error" class="red__text">
+                
+            </p>
+            <button class="main__button" type="button" id="create">
+                Criar
+            </button>
+        </form>
+    </div>
+{% endblock app %}
+
+{% block script %}
+    <script src="/static/js/oficinas/oficinas_create.js"></script> 
+{% endblock script %}

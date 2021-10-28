@@ -11,3 +11,8 @@ def listagem(request: HttpRequest):
 @is_authenticated
 def detalhes(request: HttpRequest, id: str):
     return render(request, 'oficinas/detalhes.html', context={'active': 'oficinas', "id": id})
+
+
+@is_authenticated
+def criar(request: HttpRequest):
+    return render(request, 'oficinas/create.html', context={'active': 'oficinas'})
