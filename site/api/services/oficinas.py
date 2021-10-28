@@ -257,7 +257,7 @@ def get_five_oficina(request: HttpRequest) -> JsonResponse:
         "orientador__user__nome",
         "created_at",
         "is_active"
-    )[:5]
+    )[:6]
 
     return JsonResponse(
         {
