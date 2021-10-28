@@ -10,3 +10,10 @@ class UpdateAluno:
     numero: int
     uf: str
     cep: int
+
+
+@dataclass(frozen=True)
+class UpdateResponsavel:
+    id: int
+    data_nasc: str
+    tel: str

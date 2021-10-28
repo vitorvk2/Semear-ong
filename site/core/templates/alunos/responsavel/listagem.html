@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block app %}
+    <div class="tales" onload="buscarelemento(event, 1)">
+        <h1>Responsáveis</h1><br>
+        <a href="/alunos/createresp/"><button class="main__button">Criar Responsavel</button></a>
+    </div>
+
+    <div class="content">
+        <div class="grid__3 card__grid__list"></div>
+    </div>
+{% endblock app %}
+
+{% block script %}
+    <script src="/static/js/aluno/responsavel_listagem.js"></script>
+{% endblock script %}

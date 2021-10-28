@@ -85,6 +85,16 @@ div.grid__4 {
     gap: .5rem;
 }
 
+div.grid__5 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+div.home__content__page {
+    padding: 1rem;
+    padding-left: 3rem;
+}
+
 div.home__content {
     padding: 1rem;
     padding-left: 3rem;
@@ -116,7 +126,7 @@ div.yellow__img div.image {
     height: 100vh;
     background-position: center;
     background-size: cover;
-    opacity: .15;
+    opacity: .7;
 }
 
 div.login__main {
@@ -342,7 +352,7 @@ div.card__grid header.header__card__grid {
 }
 
 div.card__grid div.content__card__grid p {
-    line-height: .5;
+    /* line-height: .5; */
     font-size: .9rem;
 }
 

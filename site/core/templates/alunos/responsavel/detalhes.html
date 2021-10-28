@@ -1,0 +1,46 @@
+<style>
+    #edit {
+        background-color: rgb(28, 117, 219);
+    }
+    #delete {
+        background-color: rgb(211, 35, 35);
+    }
+</style>
+
+{% extends 'base.html' %}
+
+{% block app %}
+    <input type="hidden" value="{{id}}" hidden id="uid">
+    <div class="tales">
+        <h1><span class="detail">Responsáveis</span> <span class="value__tales"></span></h1>
+        <br>
+    </div>
+    <div class="content">
+        <table>
+            <tr>
+                <td class="detail">Nome</td>
+                <td class="iftable infos__nome"></td>
+            </tr>
+            <tr>
+                <td class="detail">CPF</td>
+                <td class="iftable infos__cpf"></td>
+            </tr>
+            <tr>
+                <td class="detail">Data Nascimento</td>
+                <td class="iftable infos__datanasc"></td>
+            </tr>
+            <tr>
+                <td class="detail">Número de Telefone</td>
+                <td class="iftable infos__tel"></td>
+            </tr>
+        </table>
+        <br>         
+        <button class="main__button" type="button" id="delete">
+            Deletar
+        </button>
+    </div>
+{% endblock app %}
+
+{% block script %}
+    <script src="/static/js/aluno/responsavel_detalhes.js"></script>
+{% endblock script %}
