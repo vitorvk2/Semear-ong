@@ -1,6 +1,6 @@
 from api.dto.orientador import orientador_create_dto, orientador_delete_dto, orientador_update_dto
+from core.decorator import has_data_body, validate_dataclass, is_api_authenticated
 from django.views.decorators.http import require_http_methods
-from core.decorator import has_data_body, validate_dataclass
 from django.contrib.auth.hashers import make_password
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpRequest
@@ -13,6 +13,7 @@ import json
 @require_http_methods(["POST"])
 @validate_dataclass(orientador_create_dto.CreateOrientador)
 @has_data_body
+@is_api_authenticated
 def create_orientador(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body) 
 
@@ -58,6 +59,7 @@ def create_orientador(request: HttpRequest) -> JsonResponse:
 
 @csrf_exempt
 @require_http_methods(["GET"])
+@is_api_authenticated
 def get_orientador_by_id(request: HttpRequest, id: str) -> JsonResponse:
     orientador = Orientador.objects.filter(id=id, deleted=0).values(
         "id",
@@ -97,6 +99,7 @@ def get_orientador_by_id(request: HttpRequest, id: str) -> JsonResponse:
 
 @csrf_exempt
 @require_http_methods(["GET"])
+@is_api_authenticated
 def get_orientador(request: HttpRequest) -> JsonResponse:
     orientador = Orientador.objects.filter(deleted=0).order_by("-id").values(
         "id",
@@ -129,6 +132,7 @@ def get_orientador(request: HttpRequest) -> JsonResponse:
 @require_http_methods(["PUT"])
 @validate_dataclass(orientador_update_dto.UpdateOrientador)
 @has_data_body
+@is_api_authenticated
 def update_orientador(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body) 
 
@@ -179,6 +183,7 @@ def update_orientador(request: HttpRequest) -> JsonResponse:
 @require_http_methods(["DELETE"])
 @validate_dataclass(orientador_delete_dto.DeleteOrientador)
 @has_data_body
+@is_api_authenticated
 def delete_orientador(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body) 
 

@@ -12,6 +12,9 @@
         <div class="is__line"></div>
         <nav class="menu">
             <div class="is__line"></div>
+            <div class="icon__menu" onclick="toggle_menu()">
+                <i class="fas fa-bars"></i>
+            </div>
             <h1>
                 Semear
             </h1>
@@ -25,7 +28,7 @@
                 <a href="/orientador/listagem/">
                     <li {% if active == 'orientador' %}class="active"{% endif %}>Orientadores</li>
                 </a>
-                <li class="exit">Sair</li>
+                <li class="exit" onclick="logout()">Sair</li>
             </ul> 
         </nav>
         <main>

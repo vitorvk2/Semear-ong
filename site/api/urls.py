@@ -23,10 +23,13 @@ urlpatterns = [
     path('aluno/create/', aluno.create_aluno),
     path('aluno/update/', aluno.update_aluno),
     path('aluno/delete/', aluno.delete_aluno),
-    path('responsavel/create/', aluno.create_responsavel),
-    path('responsavel/<str:id>/', aluno.get_responsavel_by_id),
     path('aluno/<str:id>/', aluno.get_aluno_by_id),
     path('aluno/', aluno.get_aluno),
+
+    #! Responsável
+
+    path('responsavel/create/', aluno.create_responsavel),
+    path('responsavel/<str:id>/', aluno.get_responsavel_by_id),
 
     #! Orientador
 
@@ -43,6 +46,9 @@ urlpatterns = [
     path('oficinas/delete/', oficinas.delete_oficina),
     path('oficinas/<str:id>/', oficinas.get_oficina_by_id),
     path('oficinas/', oficinas.get_oficina),
+
+    #! Oficina Aluno
+
     path('oficinasaluno/create/', oficinas.create_aluno_oficina),
     path('oficinasaluno/<str:id_oficina>/<str:id>/', oficinas.get_oficina_aluno_by_id),
     path('oficinasaluno/<str:id_oficina>/', oficinas.get_oficina_aluno),
