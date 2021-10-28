@@ -1,0 +1,20 @@
+document.querySelector("#create").addEventListener("click", () => {
+    let data = {
+        nome: document.querySelector("#nome").value,
+        descricao: document.querySelector("#descricao").value,
+        horario_aula: document.querySelector("#horario").value,
+        orientador: document.querySelector("#orientador").value,
+        local: document.querySelector("#local").value,
+        link: document.querySelector("#link").value,
+    }
+
+    request_auth(`/api/oficinas/create/`, "POST", data)
+    .then(re => re.json())
+    .then(re => {
+        if (re.success) {
+            window.location.href = `/oficinas/list/`
+        } else {
+            document.querySelector("#error").innerHTML = re.msg
+        }
+    })
+})  
