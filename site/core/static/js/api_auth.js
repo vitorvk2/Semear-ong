@@ -11,3 +11,14 @@ const request_auth = (url, type, data) => {
         }
     })
 } 
+
+const logout = () => {
+    localStorage.clear()
+    document.cookie = "validate=; Max-Age=-99999999;"
+    document.cookie = "token=; Max-Age=-99999999;"
+    window.location = "/"
+}
+
+const toggle_menu = () => {
+    document.querySelector("nav.menu").classList.toggle('active')
+}

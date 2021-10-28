@@ -1,6 +1,6 @@
 from api.dto.oficina import oficina_create_dto, oficina_aluno_create_dto, oficina_update_dto, oficina_delete_dto
+from core.decorator import has_data_body, validate_dataclass, is_api_authenticated
 from django.views.decorators.http import require_http_methods
-from core.decorator import has_data_body, validate_dataclass
 from django.views.decorators.csrf import csrf_exempt
 from oficinas.models import Oficinas, OficinaAluno
 from django.http import JsonResponse, HttpRequest
@@ -13,6 +13,7 @@ import json
 @require_http_methods(["POST"])
 @validate_dataclass(oficina_create_dto.CreateOficina)
 @has_data_body
+@is_api_authenticated
 def create_oficina(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body) 
 
@@ -50,8 +51,15 @@ def create_oficina(request: HttpRequest) -> JsonResponse:
 
 @csrf_exempt
 @require_http_methods(["GET"])
+@is_api_authenticated
 def get_oficina_by_id(request: HttpRequest, id: str) -> JsonResponse:
-    oficina = Oficinas.objects.filter(id=id, deleted=0).values(
+    if request.is_admin:
+        oficina = Oficinas.objects.filter(id=id, deleted=0)
+    
+    else:
+        oficina = Oficinas.objects.filter(id=id, deleted=0, orientador_id=request.id_user)
+
+    oficina = oficina.values(
         "nome",
         "id",
         "descricao",
@@ -84,8 +92,15 @@ def get_oficina_by_id(request: HttpRequest, id: str) -> JsonResponse:
 
 @csrf_exempt
 @require_http_methods(["GET"])
+@is_api_authenticated
 def get_oficina(request: HttpRequest) -> JsonResponse:
-    oficina = Oficinas.objects.filter(deleted=0).order_by("-id").values(
+    if request.is_admin:
+        oficina = Oficinas.objects.filter(deleted=0)
+
+    else:
+        oficina = Oficinas.objects.filter(deleted=0, orientador_id=request.id_user)
+
+    oficina = oficina.order_by("-id").values(
         "nome",
         "id",
         "descricao",
@@ -111,10 +126,15 @@ def get_oficina(request: HttpRequest) -> JsonResponse:
 @require_http_methods(["PUT"])
 @validate_dataclass(oficina_update_dto.UpdateOficina)
 @has_data_body
+@is_api_authenticated
 def update_oficina(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body) 
 
-    oficina = Oficinas.objects.filter(id=data['id'], deleted=0)
+    if request.is_admin:
+        oficina = Oficinas.objects.filter(id=data['id'], deleted=0)
+
+    else:
+        oficina = Oficinas.objects.filter(id=data['id'], deleted=0, orientador_id=request.id_user)
 
     if not oficina.exists():
         return JsonResponse(
@@ -145,10 +165,15 @@ def update_oficina(request: HttpRequest) -> JsonResponse:
 @require_http_methods(["DELETE"])
 @validate_dataclass(oficina_delete_dto.DeleteOficina)
 @has_data_body
+@is_api_authenticated
 def delete_oficina(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body) 
 
-    oficina = Oficinas.objects.filter(id=data['id'], deleted=0)
+    if request.is_admin:
+        oficina = Oficinas.objects.filter(id=data['id'], deleted=0)
+
+    else:
+        oficina = Oficinas.objects.filter(id=data['id'], deleted=0, orientador_id=request.id_user)
 
     if not oficina.exists():
         return JsonResponse(
@@ -173,12 +198,18 @@ def delete_oficina(request: HttpRequest) -> JsonResponse:
 @require_http_methods(["POST"])
 @validate_dataclass(oficina_aluno_create_dto.CreateOficinaAluno)
 @has_data_body
+@is_api_authenticated
 def create_aluno_oficina(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body) 
 
     try:
+        if request.is_admin:
+            oficina = Oficinas.objects.get(id=data['oficina_id'])
+
+        else:
+            oficina = Oficinas.objects.get(id=data['oficina_id'], orientador_id=request.id_user)
+
         aluno = Alunos.objects.get(id=data['aluno_id'])
-        oficina = Oficinas.objects.get(id=data['oficina_id'])
 
     except (Alunos.DoesNotExist, Oficinas.DoesNotExist):
         return JsonResponse(
@@ -208,7 +239,11 @@ def create_aluno_oficina(request: HttpRequest) -> JsonResponse:
 @csrf_exempt
 @require_http_methods(["GET"])
 def get_oficina_aluno_by_id(request: HttpRequest, id: str) -> JsonResponse:
-    oficina = OficinaAluno.objects.filter(id=id, deleted=0).values()
+    if request.is_admin:
+        oficina = OficinaAluno.objects.filter(id=id, deleted=0).values()
+
+    else:
+        oficina = OficinaAluno.objects.filter(id=id, deleted=0, orientador_id=request.id_user).values()
 
     if not oficina.exists():
         return JsonResponse(
@@ -230,8 +265,15 @@ def get_oficina_aluno_by_id(request: HttpRequest, id: str) -> JsonResponse:
 
 @csrf_exempt
 @require_http_methods(["GET"])
+@is_api_authenticated
 def get_oficina_aluno(request: HttpRequest, id_oficina: str) -> JsonResponse:
-    oficina = OficinaAluno.objects.filter(deleted=0, oficina_id=id_oficina).order_by("-id").values(
+    if request.is_admin:
+        oficina = OficinaAluno.objects.filter(deleted=0, oficina_id=id_oficina)
+
+    else:
+        oficina = OficinaAluno.objects.filter(deleted=0, oficina_id=id_oficina, orientador_id=request.id_user)
+
+    oficina = oficina.order_by("-id").values(
         "id",
         "oficina__nome",
         "aluno__user__nome",

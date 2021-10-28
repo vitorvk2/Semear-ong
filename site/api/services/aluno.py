@@ -1,6 +1,6 @@
+from core.decorator import has_data_body, validate_dataclass, is_api_authenticated
 from api.dto.aluno import aluno_create_dto, aluno_update_dto, aluno_delete_dto
 from django.views.decorators.http import require_http_methods
-from core.decorator import has_data_body, validate_dataclass
 from django.contrib.auth.hashers import make_password
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpRequest
@@ -14,6 +14,7 @@ import json
 @require_http_methods(["POST"])
 @validate_dataclass(aluno_create_dto.CreateAluno)
 @has_data_body
+@is_api_authenticated
 def create_aluno(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body) 
 
@@ -70,9 +71,51 @@ def create_aluno(request: HttpRequest) -> JsonResponse:
 
 
 @csrf_exempt
+@require_http_methods(["POST"])
+@validate_dataclass(aluno_create_dto.CreateResponsavel)
+@has_data_body
+@is_api_authenticated
+def create_responsavel(request: HttpRequest) -> JsonResponse:
+    data = json.loads(request.body) 
+
+    try:
+        responsavel = Responsavel(
+            nome = data['nome'],
+            cpf = data['cpf'],
+            data_nasc = data['data_nasc'],
+            tel = data['tel']
+        )
+        responsavel.save()
+
+    except Exception as e:
+        return JsonResponse(
+            {
+                'success': False,
+                'msg': 'CPF duplicate'
+            }, 
+            status=422
+        )
+
+    return JsonResponse(
+        {
+            'success': True,
+            'id': responsavel.id,
+        }, 
+        status=201
+    )
+
+
+@csrf_exempt
 @require_http_methods(["GET"])
+@is_api_authenticated
 def get_aluno_by_id(request: HttpRequest, id: str) -> JsonResponse:
-    aluno = Alunos.objects.filter(id=id, deleted=0).values(
+    if request.is_admin:
+        aluno = Alunos.objects.filter(id=id, deleted=0)
+
+    else:
+        aluno = Alunos.objects.filter(id=id, deleted=0, oficinaaluno__oficina__orientador_id=request.id_user).select_related('oficinaaluno')
+
+    aluno = aluno.values(
         "responsavel",
         "created_at",
         "deleted",
@@ -110,8 +153,39 @@ def get_aluno_by_id(request: HttpRequest, id: str) -> JsonResponse:
 
 @csrf_exempt
 @require_http_methods(["GET"])
+@is_api_authenticated
+def get_responsavel_by_id(request: HttpRequest, id: str) -> JsonResponse:
+    responsavel = Responsavel.objects.filter(id=id, deleted=0).values()
+
+    if not responsavel.exists():
+        return JsonResponse(
+            {
+                'success': False,
+                'msg': 'Id not found'
+            }, 
+            status=422
+        )
+
+    return JsonResponse(
+        {
+            'success': True,
+            'responsavel': responsavel[0]
+        }, 
+        status=200
+    )
+
+
+@csrf_exempt
+@require_http_methods(["GET"])
+@is_api_authenticated
 def get_aluno(request: HttpRequest) -> JsonResponse:
-    aluno = Alunos.objects.filter(deleted=0).order_by("-id").values(
+    if request.is_admin:
+        aluno = Alunos.objects.filter(deleted=0)
+
+    else:
+        aluno = Alunos.objects.filter(deleted=0, oficinaaluno__oficina__orientador_id=request.id_user).select_related('oficinaaluno')
+
+    aluno = aluno.order_by("-id").values(
         "responsavel",
         "created_at",
         "deleted",
@@ -142,11 +216,16 @@ def get_aluno(request: HttpRequest) -> JsonResponse:
 @require_http_methods(["PUT"])
 @validate_dataclass(aluno_update_dto.UpdateAluno)
 @has_data_body
+@is_api_authenticated
 def update_aluno(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body) 
 
     try:
-        aluno = Alunos.objects.get(id=data['id'], deleted=0)
+        if not request.is_admin:
+            aluno = Alunos.objects.get(id=data['id'], deleted=0)
+
+        else:
+            aluno = Alunos.objects.get(id=data['id'], deleted=0, oficinaaluno__oficina__orientador_id=request.id_user)
 
     except Alunos.DoesNotExist:
         return JsonResponse(
@@ -190,10 +269,15 @@ def update_aluno(request: HttpRequest) -> JsonResponse:
 @require_http_methods(["DELETE"])
 @validate_dataclass(aluno_delete_dto.DeleteAluno)
 @has_data_body
+@is_api_authenticated
 def delete_aluno(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body) 
 
-    aluno = Alunos.objects.filter(id=data['id'], deleted=0)
+    if request.is_admin:
+        aluno = Alunos.objects.filter(id=data['id'], deleted=0)
+
+    else:
+        aluno = Alunos.objects.filter(id=data['id'], deleted=0, oficinaaluno__oficina__orientador_id=request.id_user).select_related('oficinaaluno')
 
     if not aluno.exists():
         return JsonResponse(
