@@ -88,6 +88,7 @@ div.grid__4 {
 div.grid__5 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: .5rem;
 }
 
 div.home__content__page {

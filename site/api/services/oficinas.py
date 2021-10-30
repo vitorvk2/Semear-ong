@@ -271,7 +271,7 @@ def get_oficina_aluno(request: HttpRequest, id_oficina: str) -> JsonResponse:
         oficina = OficinaAluno.objects.filter(deleted=0, oficina_id=id_oficina)
 
     else:
-        oficina = OficinaAluno.objects.filter(deleted=0, oficina_id=id_oficina, orientador_id=request.id_user)
+        oficina = OficinaAluno.objects.filter(deleted=0, oficina_id=id_oficina, oficina__orientador_id=request.id_user)
 
     oficina = oficina.order_by("-id").values(
         "id",

@@ -101,6 +101,15 @@ def get_orientador_by_id(request: HttpRequest, id: str) -> JsonResponse:
 @require_http_methods(["GET"])
 @is_api_authenticated
 def get_orientador(request: HttpRequest) -> JsonResponse:
+    if not request.is_admin:
+        return JsonResponse(
+            {
+                'success': True,
+                'orientadores': [],
+            }, 
+            status=200
+        )
+
     orientador = Orientador.objects.filter(deleted=0).order_by("-id").values(
         "id",
         "voluntario",

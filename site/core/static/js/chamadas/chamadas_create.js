@@ -10,10 +10,19 @@ const get_students = (id) => {
             for (const i of re.oficina_alunos) {
                 let check = document.createElement("input")
                 check.type = "checkbox"
+                check.className = 'input'
+
                 check.name = i.aluno_id
 
+                let lab = document.createElement('label')
+                let ci = document.createElement("div")
+                ci.className = "checkbox__input"
+
+                lab.appendChild(check)
+                lab.appendChild(ci)
+
                 let td1 = document.createElement("td")
-                td1.appendChild(check)
+                td1.appendChild(lab)
 
                 let item = document.createElement("tr")
                 item.className = "grid__2"

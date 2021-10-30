@@ -298,7 +298,6 @@ def delete_aluno(request: HttpRequest) -> JsonResponse:
     )
 
 
-# -- Responsável --
 @csrf_exempt
 @require_http_methods(["POST"])
 @validate_dataclass(aluno_create_dto.CreateResponsavel)
