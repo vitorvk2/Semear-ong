@@ -60,4 +60,5 @@ urlpatterns = [
     #! usos gerais
 
     path('login_interno/', views.make_login_interno),
+    path('login_aluno/', views.make_login_aluno),
 ]
