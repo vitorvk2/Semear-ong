@@ -92,6 +92,7 @@ div.grid__5 {
 }
 
 div.home__content__page {
+    background-color: #f6f7ff;
     padding: 1rem;
     padding-left: 3rem;
 }
@@ -350,6 +351,15 @@ div.card__grid header.header__card__grid {
     justify-content: space-between;
     margin-bottom: 1.2rem;
     font-size: 1.125rem;
+}
+
+div.card__grid header.header__card__grid span.orientador__name {
+    color: white;
+    font-weight: 600;
+}
+
+div.card__grid header.header__card__grid p.desc {
+    font-size: .8rem;
 }
 
 div.card__grid div.content__card__grid p {

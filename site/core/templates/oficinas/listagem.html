@@ -6,14 +6,15 @@
         <br>
         <div class="actions">
             <div class="input__hero">
-                <select class="input">
+                <!-- <select class="input">
                     <option value="1" selected>Ativas</option>
                     <option value="0">Inativas</option>
-                </select>
-                <label for="user">Status</label>
+                </select> -->
+                <!-- <label for="user">Status</label> -->
             </div>
-            <a href="/oficinas/create/"><button class="main__button">Criar</button></a>
-            
+            {% if admin %}
+                <a href="/oficinas/create/"><button class="main__button">Criar</button></a>
+            {% endif %}
         </div>
     </div>
     <div class="content">

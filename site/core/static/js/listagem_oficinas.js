@@ -25,7 +25,7 @@ const get_oficinas = () => {
                 let card_content = document.createElement("div")
                 card_content.className = "content__card__grid"
 
-                card_content.innerHTML = `<p>${i.descricao}</p><br><span>Orientador ${i.orientador__user__nome}</span>`
+                card_content.innerHTML = `<span>Orientador ${i.orientador__user__nome}</span><br><br><p>${i.descricao}</p>`
 
                 el.appendChild(card_content)
                 content.appendChild(el)

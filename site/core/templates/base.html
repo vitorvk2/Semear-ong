@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body>
+    <input type="hidden" hidden value="{{ admin }}" id="adm__ff">
+    
     <div class="app">
         <div class="is__line"></div>
         <nav class="menu">
@@ -25,12 +27,14 @@
                 <a href="/alunos/list/">
                     <li {% if active == 'alunos' %}class="active"{% endif %}>Alunos</li>
                 </a>
-                <a href="/alunos/responsavel/list/">
-                    <li {% if active == 'resp' %}class="active"{% endif %}>Responsáveis</li>
-                </a>
-                <a href="/orientador/listagem/">
-                    <li {% if active == 'orientador' %}class="active"{% endif %}>Orientadores</li>
-                </a>
+                {% if admin %}
+                    <a href="/alunos/responsavel/list/">
+                        <li {% if active == 'resp' %}class="active"{% endif %}>Responsáveis</li>
+                    </a>
+                    <a href="/orientador/listagem/">
+                        <li {% if active == 'orientador' %}class="active"{% endif %}>Orientadores</li>
+                    </a>
+                {% endif %}
                 <li class="exit" onclick="logout()">Sair</li>
             </ul> 
         </nav>

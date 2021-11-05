@@ -12,14 +12,18 @@ const get_oficinas = () => {
                 let header = document.createElement("header")
                 header.className = "header__card__grid"
 
-                header.innerHTML = `<span><a href="/oficinas/detail/${i.id}/">${i.nome}</a></span><i class="fas fa-pen"></i>`
+                header.innerHTML = `
+                    <span>
+                        <a href="/oficinas/detail/${i.id}/">${i.nome}</a><br>
+                        <span class="orientador__name">Orientador ${i.orientador__user__nome}</span>
+                        <br><br>
+                        <p class="desc">${i.descricao}</p>
+                    </span>`
 
                 el.appendChild(header)
 
                 let card_content = document.createElement("div")
                 card_content.className = "content__card__grid"
-
-                card_content.innerHTML = `<p>${i.orientador__user__nome}</p><span>0 Alunos</span>`
 
                 el.appendChild(card_content)
                 content.appendChild(el)

@@ -5,8 +5,8 @@ from django.http import HttpRequest
 
 @is_authenticated
 def listagem(request: HttpRequest):
-    return render(request, 'orientador/listagem.html', context={'active': 'orientador'})
+    return render(request, 'orientador/listagem.html', context={'active': 'orientador', 'admin': request.is_admin})
 
 @is_authenticated
 def create(request: HttpRequest):
-    return render(request, 'orientador/create.html', context={'active': 'orientador'})
+    return render(request, 'orientador/create.html', context={'active': 'orientador', 'admin': request.is_admin})

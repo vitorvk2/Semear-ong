@@ -1,21 +1,29 @@
 const id = document.querySelector("#uid").value
+const is_admin = document.querySelector("#adm__ff").value
 
 const get_aluno = (id,edit) => {
     request_auth(`/api/aluno/${id}/`, "GET")
     .then(re => re.json())
     .then(re => {
         document.querySelector(".infos__nome").innerHTML = re.aluno.user__nome
-        document.querySelector(".infos__cpf").innerHTML = re.aluno.user__cpf
-        if (edit==0){
-            document.querySelector(".infos__datanasc").innerHTML = re.aluno.user__data_nasc
-            document.querySelector(".infos__cep").innerHTML = re.aluno.user__cep
+
+        if (is_admin == "True") {
+            document.querySelector(".infos__cpf").innerHTML = re.aluno.user__cpf
+        }
+
+        if (edit == 0){
+            if (is_admin == "True") {
+                document.querySelector(".infos__logra").innerHTML = re.aluno.user__endereco
+                document.querySelector(".infos__bairro").innerHTML = re.aluno.user__bairro
+                document.querySelector(".infos__num").innerHTML = re.aluno.user__numero
+                document.querySelector(".infos__cep").innerHTML = re.aluno.user__cep
+                document.querySelector(".cancel_save").style.display = "none"
+                document.querySelector(".edit_delet").style.display = "inline"
+            }
+            
             document.querySelector(".infos__cidade").innerHTML = re.aluno.user__cidade
-            document.querySelector(".infos__logra").innerHTML = re.aluno.user__endereco
-            document.querySelector(".infos__bairro").innerHTML = re.aluno.user__bairro
-            document.querySelector(".infos__num").innerHTML = re.aluno.user__numero
+            document.querySelector(".infos__datanasc").innerHTML = new Date(re.aluno.user__data_nasc).toLocaleDateString()
             document.querySelector(".infos__uf").innerHTML = re.aluno.user__uf
-            document.querySelector(".cancel_save").style.display = "none"
-            document.querySelector(".edit_delet").style.display = "inline"
         } else {
             document.querySelector(".infos__datanasc").innerHTML = `<input class="input" style="width: 320px;" type="date" name="data_nasc">`
             document.querySelector(".infos__cep").innerHTML = `<input type="number" style="width: 320px;" class="input" id="inputs" name="cep" onfocusout="buscarCep(event)" required>`
@@ -30,45 +38,47 @@ const get_aluno = (id,edit) => {
     })
 }
 
-document.querySelector("#edit").addEventListener("click", () => {
-    get_aluno(id,1)
-})
-
-document.querySelector("#cancel").addEventListener("click", () => {
-    get_aluno(id,0)
-})
-
-document.querySelector("#delete").addEventListener("click", () => {
-    if (confirm('Você realmente deseja excluir este aluno?')) {
+if (is_admin == "True") {
+    document.querySelector("#edit").addEventListener("click", () => {
+        get_aluno(id, 1)
+    })
+    
+    document.querySelector("#cancel").addEventListener("click", () => {
+        get_aluno(id, 0)
+    })
+    
+    document.querySelector("#delete").addEventListener("click", () => {
+        if (confirm('Você realmente deseja excluir este aluno?')) {
+            // Try para insersão via API
+            request_auth(`/api/aluno/delete/`, "DELETE", {
+                "id": id
+            });
+            alert('Deletado com sucesso!')
+            window.location.assign("/alunos/list/");
+        } else {
+            return
+        }
+    })
+    
+    document.querySelector("#salve").addEventListener("click", () => {
+        //coleta de dados
+        let data = {
+            "id": id,
+            "data_nasc": document.querySelector("input[name=data_nasc]").value,
+            "cep": parseInt(document.querySelector("input[name=cep]").value),
+            "endereco": document.querySelector("input[name=logradouro]").value,
+            "numero": parseInt(document.querySelector("input[name=numero]").value),
+            "bairro": document.querySelector("input[name=bairro]").value,
+            "cidade": document.querySelector("input[name=cidade]").value,
+            "uf": document.querySelector("input[name=uf]").value
+        }
+    
         // Try para insersão via API
-        request_auth(`/api/aluno/delete/`, "DELETE", {
-            "id": id
-        });
-        alert('Deletado com sucesso!')
-        window.location.assign("/alunos/list/");
-    } else {
-        return
-    }
-})
-
-document.querySelector("#salve").addEventListener("click", () => {
-    //coleta de dados
-    let data = {
-        "id": id,
-        "data_nasc": document.querySelector("input[name=data_nasc]").value,
-        "cep": parseInt(document.querySelector("input[name=cep]").value),
-        "endereco": document.querySelector("input[name=logradouro]").value,
-        "numero": parseInt(document.querySelector("input[name=numero]").value),
-        "bairro": document.querySelector("input[name=bairro]").value,
-        "cidade": document.querySelector("input[name=cidade]").value,
-        "uf": document.querySelector("input[name=uf]").value
-    }
-
-    // Try para insersão via API
-    request_auth(`/api/aluno/update/`, "PUT", data);
-    alert('Atualizado com sucesso!')
-    document.location.reload(true);
-})
+        request_auth(`/api/aluno/update/`, "PUT", data);
+        alert('Atualizado com sucesso!')
+        document.location.reload(true);
+    })
+}
 
 
 // Função via CEP
