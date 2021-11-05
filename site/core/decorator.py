@@ -128,6 +128,9 @@ def is_authenticated(function: Callable) -> Callable:
                 status=403
             )
 
+        request.is_admin = data['is_admin']
+        request.user_id = data['id']
+
         return function(request, *args, **kwargs)
 
     wrap.__doc__ = function.__doc__
