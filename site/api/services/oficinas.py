@@ -308,3 +308,30 @@ def get_five_oficina(request: HttpRequest) -> JsonResponse:
         }, 
         status=200
     )
+
+
+@csrf_exempt
+@require_http_methods(["POST"])
+@validate_dataclass(oficina_delete_dto.DeleteOficina)
+@has_data_body
+@is_api_authenticated
+def get_aluno_oficinas_inscrito(request: HttpRequest) -> JsonResponse:
+    data = json.loads(request.body) 
+
+    oficina = Oficinas.objects.filter(oficinaaluno__aluno_id=data['id'], deleted=0).order_by("-id").values(
+        "nome",
+        "id",
+        "descricao",
+        "orientador__user__nome",
+        "created_at",
+        "horario",
+        "is_active"
+    )
+
+    return JsonResponse(
+        {
+            'success': True,
+            'oficinas': list(oficina),
+        }, 
+        status=200
+    )
