@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:semear/pages/home/home.dart';
 import 'package:semear/paletas/paleta.dart';
 
 import 'login.service.dart';
@@ -32,6 +34,7 @@ class LoginPage extends StatelessWidget {
                 color: Color(0x01000001),
               ),
               TextField(
+                controller: user_ctrl,
                 decoration: InputDecoration(
                     hintText: "Usuário",
                     border: OutlineInputBorder(
@@ -39,6 +42,7 @@ class LoginPage extends StatelessWidget {
               ),
               Divider(),
               TextField(
+                controller: password_ctrl,
                 obscureText: true,
                 decoration: InputDecoration(
                     hintText: "Senha",
@@ -50,7 +54,13 @@ class LoginPage extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () async {
-                  await makeLogin(context);
+                  print(await makeLogin(context));
+                  if (await makeLogin(context)) {
+                    Navigator.of(context).pushAndRemoveUntil(
+                      CupertinoPageRoute(builder: (ctx) => HomePage()),
+                      (router) => false,
+                    );
+                  }
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(7.0),
