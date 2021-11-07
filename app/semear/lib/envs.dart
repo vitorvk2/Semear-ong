@@ -1,1 +1,1 @@
-const url_semear = "http://localhost:8000";
+const url_semear = "http://192.168.1.11:8000";

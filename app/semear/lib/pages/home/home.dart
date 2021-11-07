@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:semear/envs.dart';
 import 'package:semear/pages/home/home.service.dart';
+import 'package:semear/pages/oficina_detalhes/oficina_detalhes.dart';
 import 'package:semear/paletas/paleta.dart';
 
 class HomePage extends StatefulWidget {
@@ -47,7 +50,19 @@ class _HomePageState extends State<HomePage> {
                       margin: EdgeInsets.only(bottom: 25),
                       child: Column(
                         children: [
-                          // imagem,
+                          oficinas[i]["imagens"].length > 0 ? 
+                          Container(
+                            height: 200,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(14)),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  url_semear + oficinas[i]["imagens"][0]
+                                ),
+                                fit: BoxFit.cover
+                              ),
+                            ),
+                          ) : Container(),
                           Container(
                             padding: EdgeInsets.all(25),
                             child: Column(
@@ -89,7 +104,11 @@ class _HomePageState extends State<HomePage> {
                                   color: Color(0x01000001),
                                 ),
                                 TextButton(
-                                  onPressed: null,
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      CupertinoPageRoute(builder: (ctx2) => OficinaDetalhesPage()),
+                                    );
+                                  },
                                   child: Padding(
                                     padding: const EdgeInsets.all(2.0),
                                     child: Text(
