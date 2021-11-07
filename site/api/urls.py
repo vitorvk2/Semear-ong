@@ -50,10 +50,12 @@ urlpatterns = [
     path('oficinas/<str:id>/', oficinas.get_oficina_by_id),
     path('oficinas/', oficinas.get_oficina),
     path('oficinasfive/', oficinas.get_five_oficina),
+    path('oficinasimg/add/', oficinas.add_image_oficina),
 
     #! Oficina Aluno
 
     path('oficinasaluno/create/', oficinas.create_aluno_oficina),
+    path('oficinasaluno/getalunooficinas/', oficinas.get_aluno_oficinas_inscrito),
     path('oficinasaluno/<str:id_oficina>/<str:id>/', oficinas.get_oficina_aluno_by_id),
     path('oficinasaluno/<str:id_oficina>/', oficinas.get_oficina_aluno),
 

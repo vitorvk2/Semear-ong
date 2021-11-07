@@ -97,16 +97,16 @@ def make_login_aluno(request: HttpRequest) -> JsonResponse:
     user_auth = authenticate(username=data['username'], password=data['password'])
 
     if user_auth and user_auth.is_active:
-        orientador_dados = {
-            'id': orientador[0].id,
-            'is_admin': orientador[0].is_admin,
+        aluno_dados = {
+            'id': aluno[0].id,
+            'is_admin': False,
             'name': user[0].nome
         }
         
-        token, validate = get_pairs_token(orientador_dados)
+        token, validate = get_pairs_token(aluno_dados)
 
         return JsonResponse({
-            "data": orientador_dados,
+            "data": aluno_dados,
             'token': token,
             "validate": validate,
             'success': True,

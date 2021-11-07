@@ -7,10 +7,22 @@ const get_oficinas = () => {
 
             for (const i of re.oficina) {
                 let el = document.createElement("div")
-                el.className = "card__grid"
-
                 let header = document.createElement("header")
+                let imgs = `
+                    <div class="img__crop">
+                    </div>
+                `
+
+                el.className = "card__grid"
                 header.className = "header__card__grid"
+
+                if (i.imagens.length) {
+                    imgs = `
+                        <div class="img__crop">
+                            <img src="${i.imagens[0]}">
+                        </div>
+                    `
+                }
 
                 header.innerHTML = `
                     <span>
@@ -20,12 +32,8 @@ const get_oficinas = () => {
                         <p class="desc">${i.descricao}</p>
                     </span>`
 
+                el.innerHTML = imgs
                 el.appendChild(header)
-
-                let card_content = document.createElement("div")
-                card_content.className = "content__card__grid"
-
-                el.appendChild(card_content)
                 content.appendChild(el)
             }
         }

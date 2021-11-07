@@ -14,6 +14,14 @@ const get_oficina = (id) => {
             document.querySelector(".infos__desc").innerHTML = re.oficina.descricao
             document.querySelector(".infos__status").innerHTML = re.oficina.is_active ? 'Ativa' : 'Inativa'
             document.querySelector(".infos__chamada a").href = "/chamada/" + re.oficina.id + "/"
+            
+            for (const i of re.oficina.imagens) {
+                document.querySelector("#imgs").innerHTML += `
+                    <div class="img__crop">
+                        <img src="${i}">
+                    </div>
+                `
+            }
         }
     })
 }

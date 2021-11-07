@@ -1,15 +1,24 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:semear/envs.dart';
+import 'package:semear/pages/home/home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-Future makeLogin(BuildContext context) async {
+final TextEditingController user_ctrl = TextEditingController();
+final TextEditingController password_ctrl = TextEditingController();
+
+Future<bool> makeLogin(BuildContext context) async {
   http.Response data = await http.post(
     Uri.parse(
       url_semear + "/api/login_aluno/",
     ),
-    body: jsonEncode({"username": 'teste', "password": '13'}),
+    body: jsonEncode({
+      "username": user_ctrl.text,
+      "password": password_ctrl.text,
+    }),
   );
 
   Map<String, dynamic> dataJson = jsonDecode(data.body);
@@ -30,6 +39,27 @@ Future makeLogin(BuildContext context) async {
           ],
         );
       },
+    );
+
+    return false;
+  }
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  prefs.setInt('id_aluno', dataJson['data']['id']);
+  prefs.setString('token', dataJson['token']);
+  prefs.setString('validate', dataJson['validate']);
+
+  return true;
+}
+
+Future checkLogin(BuildContext ctx) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  if ((prefs.getString('token') ?? '') != '') {
+    Navigator.of(ctx).pushAndRemoveUntil(
+      CupertinoPageRoute(builder: (ctx2) => HomePage()),
+      (router) => false,
     );
   }
 }
