@@ -50,6 +50,7 @@ urlpatterns = [
     path('oficinas/<str:id>/', oficinas.get_oficina_by_id),
     path('oficinas/', oficinas.get_oficina),
     path('oficinasfive/', oficinas.get_five_oficina),
+    path('oficinasimg/add/', oficinas.add_image_oficina),
 
     #! Oficina Aluno
 

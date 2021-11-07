@@ -1,12 +1,19 @@
 from api.dto.oficina import oficina_create_dto, oficina_aluno_create_dto, oficina_update_dto, oficina_delete_dto
 from core.decorator import has_data_body, validate_dataclass, is_api_authenticated
+from oficinas.models import Oficinas, OficinaAluno, OficinaImagem
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.views.decorators.http import require_http_methods
+from django.core.files.storage import FileSystemStorage
 from django.views.decorators.csrf import csrf_exempt
-from oficinas.models import Oficinas, OficinaAluno
 from django.http import JsonResponse, HttpRequest
 from orientador.models import Orientador
 from alunos.models import Alunos
+from django.conf import settings
+from core.models import User
+from io import BytesIO
+from PIL import Image
 import json
+import sys
 
 
 @csrf_exempt
@@ -81,6 +88,19 @@ def get_oficina_by_id(request: HttpRequest, id: str) -> JsonResponse:
             status= 422
         )
 
+    imagens = OficinaImagem.objects.filter(oficina_id__in=list(oficina.values_list('id', flat=True))).values('oficina', 'img')
+    imagens_dict = {}
+
+    for i in imagens:
+        if i['oficina'] not in imagens_dict:
+            imagens_dict[i['oficina']] = []
+        imagens_dict[i['oficina']].append(i['img'])
+
+    oficina = list(oficina)
+
+    for index, i in enumerate(oficina):
+        oficina[index]['imagens'] = imagens_dict.get(i['id'], [])
+
     return JsonResponse(
         {
             'success': True,
@@ -113,10 +133,23 @@ def get_oficina(request: HttpRequest) -> JsonResponse:
         "is_active"
     )[:30]
 
+    imagens = OficinaImagem.objects.filter(oficina_id__in=list(oficina.values_list('id', flat=True))).values('oficina', 'img')
+    imagens_dict = {}
+
+    for i in imagens:
+        if i['oficina'] not in imagens_dict:
+            imagens_dict[i['oficina']] = []
+        imagens_dict[i['oficina']].append(i['img'])
+
+    oficina = list(oficina)
+
+    for index, i in enumerate(oficina):
+        oficina[index]['imagens'] = imagens_dict.get(i['id'], [])
+
     return JsonResponse(
         {
             'success': True,
-            'oficina': list(oficina),
+            'oficina': oficina,
         }, 
         status=200
     )
@@ -299,12 +332,25 @@ def get_five_oficina(request: HttpRequest) -> JsonResponse:
         "orientador__user__nome",
         "created_at",
         "is_active"
-    )[:6]
+    )[:5]
+
+    imagens = OficinaImagem.objects.filter(oficina_id__in=list(oficina.values_list('id', flat=True))).values('oficina', 'img')
+    imagens_dict = {}
+
+    for i in imagens:
+        if i['oficina'] not in imagens_dict:
+            imagens_dict[i['oficina']] = []
+        imagens_dict[i['oficina']].append(i['img'])
+
+    oficina = list(oficina)
+
+    for index, i in enumerate(oficina):
+        oficina[index]['imagens'] = imagens_dict.get(i['id'], [])
 
     return JsonResponse(
         {
             'success': True,
-            'oficina': list(oficina),
+            'oficina': oficina,
         }, 
         status=200
     )
@@ -328,10 +374,68 @@ def get_aluno_oficinas_inscrito(request: HttpRequest) -> JsonResponse:
         "is_active"
     )
 
+    imagens = OficinaImagem.objects.filter(oficina_id__in=list(oficina.values_list('id', flat=True))).values('oficina', 'img')
+    imagens_dict = {}
+
+    for i in imagens:
+        if i['oficina'] not in imagens_dict:
+            imagens_dict[i['oficina']] = []
+        imagens_dict[i['oficina']].append(i['img'])
+
+    oficina = list(oficina)
+
+    for index, i in enumerate(oficina):
+        oficina[index]['imagens'] = imagens_dict.get(i['id'], [])
+
     return JsonResponse(
         {
             'success': True,
-            'oficinas': list(oficina),
+            'oficinas': oficina,
+        }, 
+        status=200
+    )
+
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def add_image_oficina(request: HttpRequest) -> JsonResponse:
+    try:
+        oficina = Oficinas.objects.get(id=request.POST.get('id'))
+    
+    except Oficinas.DoesNotExist:
+        return JsonResponse(
+            {
+                'success': False,
+                'msg': 'Id not found'
+            }, 
+            status= 422
+        )
+
+    image = Image.open(request.FILES['img'])
+    width, height = image.size
+    o = BytesIO()
+
+    if width > 1024:
+        height = (1024 * height) / width
+        image = image.resize((1024, int(height)), Image.ANTIALIAS)
+
+    image.save(o, format='WEBP', quality=100)
+    o.seek(0)
+
+    name = User.objects.make_random_password(20)
+
+    file = InMemoryUploadedFile(o, 'ImageField', "%s.webp" % name, 'image/webp', sys.getsizeof(o), None)
+    fs = FileSystemStorage(location=settings.MEDIA_ROOT + f"/oficinas/")
+
+    fs.save((name + "." + file.name.split('.')[-1]).lower(), file)
+    nameimg = f"/media/oficinas/{name}.webp".lower()
+
+    OficinaImagem(oficina=oficina, img=nameimg).save()
+
+    return JsonResponse(
+        {
+            'success': True,
+            'path': nameimg
         }, 
         status=200
     )
