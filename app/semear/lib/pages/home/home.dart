@@ -4,7 +4,6 @@ import 'package:semear/envs.dart';
 import 'package:semear/pages/home/home.service.dart';
 import 'package:semear/pages/oficina_detalhes/oficina_detalhes.dart';
 import 'package:semear/paletas/paleta.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -51,19 +50,19 @@ class _HomePageState extends State<HomePage> {
                       margin: EdgeInsets.only(bottom: 25),
                       child: Column(
                         children: [
-                          oficinas[i]["imagens"].length > 0 ? 
-                          Container(
-                            height: 200,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(14)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                  url_semear + oficinas[i]["imagens"][0]
-                                ),
-                                fit: BoxFit.cover
-                              ),
-                            ),
-                          ) : Container(),
+                          oficinas[i]["imagens"].length > 0
+                              ? Container(
+                                  height: 200,
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(14)),
+                                    image: DecorationImage(
+                                        image: NetworkImage(url_semear +
+                                            oficinas[i]["imagens"][0]),
+                                        fit: BoxFit.cover),
+                                  ),
+                                )
+                              : Container(),
                           Container(
                             padding: EdgeInsets.all(25),
                             child: Column(
@@ -107,7 +106,9 @@ class _HomePageState extends State<HomePage> {
                                 TextButton(
                                   onPressed: () {
                                     Navigator.of(context).push(
-                                      CupertinoPageRoute(builder: (ctx2) => OficinaDetalhesPage()),
+                                      CupertinoPageRoute(
+                                          builder: (ctx2) =>
+                                              OficinaDetalhesPage()),
                                     );
                                   },
                                   child: Padding(
