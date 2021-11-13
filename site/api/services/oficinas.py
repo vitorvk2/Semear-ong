@@ -439,3 +439,53 @@ def add_image_oficina(request: HttpRequest) -> JsonResponse:
         }, 
         status=200
     )
+
+
+@csrf_exempt
+@require_http_methods(["GET"])
+@is_api_authenticated
+def get_oficina_aluno_detalhe_by_id(request: HttpRequest, id: str) -> JsonResponse:
+    oficina = Oficinas.objects.filter(id=id, deleted=0, oficinaaluno__aluno_id=request.id_user)
+
+    oficina = oficina.values(
+        "nome",
+        "id",
+        "descricao",
+        "local",
+        "link",
+        "horario",
+        "orientador__id",
+        "orientador__user__nome",
+        "created_at",
+        "is_active"
+    )
+
+    if not oficina.exists():
+        return JsonResponse(
+            {
+                'success': False,
+                'msg': 'Id not found'
+            }, 
+            status= 422
+        )
+
+    imagens = OficinaImagem.objects.filter(oficina_id__in=list(oficina.values_list('id', flat=True))).values('oficina', 'img')
+    imagens_dict = {}
+
+    for i in imagens:
+        if i['oficina'] not in imagens_dict:
+            imagens_dict[i['oficina']] = []
+        imagens_dict[i['oficina']].append(i['img'])
+
+    oficina = list(oficina)
+
+    for index, i in enumerate(oficina):
+        oficina[index]['imagens'] = imagens_dict.get(i['id'], [])
+
+    return JsonResponse(
+        {
+            'success': True,
+            'oficina': oficina[0],
+        }, 
+        status=200
+    )
