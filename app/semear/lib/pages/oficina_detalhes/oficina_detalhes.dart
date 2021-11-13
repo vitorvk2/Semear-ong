@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:semear/pages/oficina_detalhes/oficina_detalhes.service.dart';
 import 'package:semear/paletas/paleta.dart';
 
 class OficinaDetalhesPage extends StatelessWidget {
+  final int oficina_id;
+
+  OficinaDetalhesPage({
+    required this.oficina_id
+  });
+
   @override
   Widget build(BuildContext context) {
+    detalhesOficina(oficina_id);
     return Scaffold(
       body: SafeArea(
         child: Padding(
