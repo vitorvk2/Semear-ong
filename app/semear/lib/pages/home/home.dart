@@ -4,6 +4,7 @@ import 'package:semear/envs.dart';
 import 'package:semear/pages/home/home.service.dart';
 import 'package:semear/pages/oficina_detalhes/oficina_detalhes.dart';
 import 'package:semear/paletas/paleta.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
