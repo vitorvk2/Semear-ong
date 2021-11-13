@@ -107,8 +107,10 @@ class _HomePageState extends State<HomePage> {
                                   onPressed: () {
                                     Navigator.of(context).push(
                                       CupertinoPageRoute(
-                                          builder: (ctx2) =>
-                                              OficinaDetalhesPage()),
+                                        builder: (ctx2) => OficinaDetalhesPage(
+                                          oficinaId: oficinas[i]['id'],
+                                        ),
+                                      ),
                                     );
                                   },
                                   child: Padding(
