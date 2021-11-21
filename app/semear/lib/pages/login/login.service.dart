@@ -67,12 +67,9 @@ Future checkLogin(BuildContext ctx) async {
       },
     );
 
-    print(data.body);
-    print(data.statusCode);
-
     if (data.statusCode != 200) {
-      // prefs.clear();
-      // return;
+      prefs.clear();
+      return;
     }
 
     Navigator.of(ctx).pushAndRemoveUntil(
