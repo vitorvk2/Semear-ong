@@ -9,7 +9,7 @@ document.querySelector("#create").addEventListener("click", () => {
     let senhaconf = document.querySelector("form input[name=confirmPassword]").value
     
     if (senha != senhaconf){
-        statuus.innerHTML = '<a style="color:red">Erro! Senhas não coincidem.</a>'
+        statuus.innerHTML = '<a class="red__text">Erro! Senhas não coincidem.</a>'
         jumpScroll()
         return
     }     
@@ -33,10 +33,9 @@ document.querySelector("#create").addEventListener("click", () => {
     // Try para insersão via API
     let response = request_auth(`/api/aluno/create/`, "POST", data);
     if (response.status == 201 || response.status == 200) {
-        statuus.innerHTML = '<a style="color:green">Cadastrado com sucesso!</a>'
-        jumpScroll()
+        window.location.href = "/alunos/list/"
     } else {
-        statuus.innerHTML = '<a style="color:red">Erro! Revise os dados.</a>'
+        statuus.innerHTML = '<a class="red__text">Erro! Revise os dados.</a>'
         jumpScroll()
     }
 })

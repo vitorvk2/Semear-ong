@@ -1,12 +1,3 @@
-<style>
-    #edit {
-        background-color: rgb(28, 117, 219);
-    }
-    #delete {
-        background-color: rgb(211, 35, 35);
-    }
-</style>
-
 {% extends 'base.html' %}
 
 {% block app %}
@@ -34,10 +25,12 @@
                 <td class="iftable infos__tel"></td>
             </tr>
         </table>
-        <br>         
-        <button class="main__button" type="button" id="delete">
-            Deletar
-        </button>
+        <br>
+        {% if admin %}
+            <button class="main__button main__fail__button" type="button" id="delete">
+                Deletar
+            </button>
+        {% endif %}
     </div>
 {% endblock app %}
 

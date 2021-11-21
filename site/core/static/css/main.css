@@ -51,6 +51,16 @@ a {
     background-color: var(--third);
 }
 
+.main__second__button {
+    color: white;
+    background-color: var(--second);
+}
+
+.main__fail__button {
+    color: white;
+    background-color: var(--fail);
+}
+
 div.is__line {
     width: 7px;
     height: 100px;
