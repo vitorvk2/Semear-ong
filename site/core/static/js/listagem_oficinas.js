@@ -8,7 +8,7 @@ const get_oficinas = () => {
     .then(re => re.json())
     .then(re => {
         if (re.success) {
-            let content = document.querySelector(".content .grid__5")
+            let content = document.querySelector(".content .grid__4")
             content.innerHTML = ''
             
             for (const i of re.oficina) {

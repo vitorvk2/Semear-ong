@@ -20,18 +20,17 @@ const get_aluno = (id,edit) => {
                 document.querySelector(".cancel_save").style.display = "none"
                 document.querySelector(".edit_delet").style.display = "inline"
             }
-            
             document.querySelector(".infos__cidade").innerHTML = re.aluno.user__cidade
             document.querySelector(".infos__datanasc").innerHTML = new Date(re.aluno.user__data_nasc).toLocaleDateString()
             document.querySelector(".infos__uf").innerHTML = re.aluno.user__uf
         } else {
-            document.querySelector(".infos__datanasc").innerHTML = `<input class="input" style="width: 320px;" type="date" name="data_nasc">`
-            document.querySelector(".infos__cep").innerHTML = `<input type="number" style="width: 320px;" class="input" id="inputs" name="cep" onfocusout="buscarCep(event)" required>`
-            document.querySelector(".infos__cidade").innerHTML = `<input type="text" style="width: 320px;" class="input" id="inputs" name="cidade" required>`
-            document.querySelector(".infos__logra").innerHTML = `<input type="text" style="width: 320px;" class="input" id="inputs" name="logradouro"  required>`
-            document.querySelector(".infos__bairro").innerHTML = `<input type="text" style="width: 320px;" class="input" id="inputs" name="bairro" required>`
-            document.querySelector(".infos__num").innerHTML = `<input type="number" style="width: 320px;" class="input" id="inputs" name="numero"  required>`
-            document.querySelector(".infos__uf").innerHTML = `<input type="text" style="width: 320px;" class="input" id="inputs" name="uf" required>`
+            document.querySelector(".infos__datanasc").innerHTML = `<input class="input" style="width: 320px;" type="date" value="`+re.aluno.user__data_nasc+`"  name="data_nasc">`
+            document.querySelector(".infos__cep").innerHTML = `<input type="number" style="width: 320px;" class="input" id="inputs" name="cep" onfocusout="buscarCep(event)" value="`+re.aluno.user__cep+`" required>`
+            document.querySelector(".infos__cidade").innerHTML = `<input type="text" style="width: 320px;" class="input" id="inputs" name="cidade" value="`+re.aluno.user__cidade+`" required>`
+            document.querySelector(".infos__logra").innerHTML = `<input type="text" style="width: 320px;" class="input" id="inputs" name="logradouro" value="`+re.aluno.user__endereco+`" required>`
+            document.querySelector(".infos__bairro").innerHTML = `<input type="text" style="width: 320px;" class="input" id="inputs" name="bairro" value="`+re.aluno.user__bairro+`" required>`
+            document.querySelector(".infos__num").innerHTML = `<input type="number" style="width: 320px;" class="input" id="inputs" name="numero" value="`+re.aluno.user__numero+`" required>`
+            document.querySelector(".infos__uf").innerHTML = `<input type="text" style="width: 320px;" class="input" id="inputs" name="uf" value="`+re.aluno.user__uf+`" required>`
             document.querySelector(".edit_delet").style.display = "none"   
             document.querySelector(".cancel_save").style.display = "inline"
         }

@@ -3,11 +3,23 @@
 {% block app %}
     <div class="tales" onload="buscarelemento(event, 1)">
         <h1>Alunos</h1><br>
-        <a href="/alunos/create/"><button class="main__button">Criar Aluno</button></a>
+        <a href="/alunos/create/"><button class="main__button">Criar</button></a>
     </div>
+    <div class="content"  >
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td style="width:20%;">Nome</td>
+                    <td style="width:60%;">Endereço</td>
+                    <td style="width:10%;">Inscrição</td>
+                    <td>Ações</td>
+                </tr>
+            </thead>
+            <tbody>
 
-    <div class="content">
-        <div class="grid__3 card__grid__list"></div>
+            </tbody>
+        </table>
     </div>
 {% endblock app %}
 

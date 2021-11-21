@@ -1,15 +1,3 @@
-<style>
-    #edit, #cancel{
-        background-color: rgb(28, 117, 219);
-    }
-    #delete {
-        background-color: rgb(211, 35, 35);
-    }
-    #salve {
-        background-color: rgb(35, 211, 44);
-    }
-</style>
-
 {% extends 'base.html' %}
 
 {% block app %}
@@ -64,18 +52,18 @@
         <br>
         {% if admin %}
             <div class="edit_delet" style="display:none">
-                <button class="main__button" type="button" id="edit">
+                <button class="main__button" style="background-color: var(--detail);"  type="button" id="edit">
                     Editar
                 </button>            
-                <button class="main__button" type="button" id="delete">
+                <button class="main__button" style="background-color: var(--fail);" type="button" id="delete">
                     Deletar
                 </button>
             </div>
             <div class="cancel_save" style="display:none">
-                <button class="main__button" type="button" id="cancel">
+                <button class="main__button" style="background-color: var(--detail);" type="button" id="cancel">
                     Cancelar
                 </button>            
-                <button class="main__button" type="button" id="salve">
+                <button class="main__button" style="background-color: var(--third);" type="button" id="salve">
                     Salvar
                 </button>
             </div>

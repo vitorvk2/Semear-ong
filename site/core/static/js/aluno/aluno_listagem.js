@@ -1,32 +1,74 @@
+const is_admin = document.querySelector("#adm__ff").value
+
 const get_alunos = () => {
     request_auth("/api/aluno/", "GET")
     .then(re => re.json())
     .then(re => {
         if (re.success) {
-            let content = document.querySelector(".content .grid__3")
-            content.innerHTML = ''
+            
+            let body = document.querySelector("table.table tbody")
             
             for (const i of re.alunos) {
-                let el = document.createElement("div")
-                el.className = "card__grid"
+                let tr = document.createElement("tr")
+                
+                let td1 = document.createElement("td")
+                td1.innerHTML = i.id
+                tr.appendChild(td1)
 
-                let header = document.createElement("header")
-                header.className = "header__card__grid"
+                let td2 = document.createElement("td")
+                td2.innerHTML = i.user__nome
+                tr.appendChild(td2)
 
-                header.innerHTML = `<span><a href="/alunos/detail/${i.id}/">${i.user__nome}</a></span><i class="fas fa-pen"></i>`
+                let td3 = document.createElement("td")
+                td3.innerHTML = i.user__endereco + ", " + i.user__numero + " - " + i.user__bairro + " - " + i.user__cidade + "/" + i.user__uf 
+                tr.appendChild(td3)
 
-                el.appendChild(header)
+                let td5 = document.createElement("td")
+                td5.innerHTML = DataFormate(i.created_at)
+                tr.appendChild(td5)
 
-                let card_content = document.createElement("div")
-                card_content.className = "content__card__grid"
+                let td6 = document.createElement("td")
+                let select = document.createElement("select")
 
-                card_content.innerHTML = `<p>${i.id}</p><span>Alunos</span>`
+                select.className = "input"
+                select.onchange = (e) => {
+                    if ((e.target.value == 2) && (is_admin == "True")){
+                        window.location.assign("/alunos/detail/"+i.id+"/");
+                    } else if (( e.target.value == 3) && (is_admin == "True")){
+                        if (confirm('Você realmente deseja excluir este aluno?')) {
+                            // Try para insersão via API
+                            request_auth(`/api/aluno/delete/`, "DELETE", {
+                                "id": i.id
+                            });
+                            alert('Deletado com sucesso!')
+                            window.location.assign("/alunos/list/");
+                        } else {
+                            return
+                        }
+                    }
+                }
 
-                el.appendChild(card_content)
-                content.appendChild(el)
+                select.innerHTML = `
+                    <option value="" selected disabled>Ação</option>
+                    {% if admin %}
+                        <option value="2">Editar</option>
+                        <option value="3">Apagar</option>
+                    {% endif %}
+                    `
+
+                td6.appendChild(select)
+                tr.appendChild(td6)
+                body.appendChild(tr)
             }
         }
     })
 }
+
+function DataFormate(datapure){
+    data = new Date(datapure);
+    dataFormatada = data.toLocaleDateString('pt-BR', {timeZone: 'UTC'});
+    return dataFormatada;
+}
+
 
 get_alunos()
