@@ -249,3 +249,29 @@ def get_chamada_aluno(request: HttpRequest, id_chamada: str) -> JsonResponse:
         }, 
         status=200
     )
+
+
+@csrf_exempt
+@require_http_methods(["GET"])
+@is_api_authenticated
+def get_chamada_by_aluno(request: HttpRequest, oficina_id: str, aluno_id: str) -> JsonResponse:
+    chamada = ChamadaAluno.objects.filter(deleted=0, chamada__oficina_id=oficina_id, aluno_id=aluno_id).select_related(
+        "chamdada", 
+        "aluno", 
+        "oficina"
+    ).order_by("-id").values(
+        "id",
+        "chamada",
+        "chamada__oficina__nome",
+        "aluno__user__nome",
+        "presente",
+        "created_at",
+    )
+
+    return JsonResponse(
+        {
+            'success': True,
+            'chamada_alunos': list(chamada),
+        }, 
+        status=200
+    )

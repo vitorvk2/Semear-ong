@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:semear/components/bootom_menu.dart';
 import 'package:semear/envs.dart';
 import 'package:semear/pages/home/home.service.dart';
 import 'package:semear/pages/oficina_detalhes/oficina_detalhes.dart';
@@ -57,9 +58,10 @@ class _HomePageState extends State<HomePage> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(14)),
                                     image: DecorationImage(
-                                        image: NetworkImage(url_semear +
-                                            oficinas[i]["imagens"][0]),
-                                        fit: BoxFit.cover),
+                                      image: NetworkImage(url_semear +
+                                          oficinas[i]["imagens"][0]),
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 )
                               : Container(),
@@ -144,14 +146,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: SemearColor[400],
-        items: [
-          BottomNavigationBarItem(label: "pesquisar", icon: Icon(null)),
-          BottomNavigationBarItem(label: "a", icon: Icon(null)),
-          BottomNavigationBarItem(label: "a", icon: Icon(null)),
-        ],
-      ),
+      bottomNavigationBar: BottomMenuComponent(),
     );
   }
 }

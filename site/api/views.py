@@ -1,4 +1,5 @@
-from core.decorator import has_data_body, validate_dataclass
+from core.decorator import has_data_body, validate_dataclass, is_api_authenticated
+from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpRequest, JsonResponse
 from django.contrib.auth import authenticate
@@ -13,6 +14,7 @@ import json
 
 @csrf_exempt
 @has_data_body
+@require_http_methods(["POST"])
 @validate_dataclass(login_dto.MakeLogin)
 def make_login_interno(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body)
@@ -68,6 +70,7 @@ def make_login_interno(request: HttpRequest) -> JsonResponse:
 
 @csrf_exempt
 @has_data_body
+@require_http_methods(["POST"])
 @validate_dataclass(login_dto.MakeLogin)
 def make_login_aluno(request: HttpRequest) -> JsonResponse:
     data = json.loads(request.body)
@@ -119,3 +122,12 @@ def make_login_aluno(request: HttpRequest) -> JsonResponse:
         }, 
         status=401
     )
+
+
+@csrf_exempt
+@is_api_authenticated
+@require_http_methods(["POST"])
+def validate_login(request: HttpRequest) -> JsonResponse:
+    return JsonResponse({
+        'success': True,
+    }, status=200)

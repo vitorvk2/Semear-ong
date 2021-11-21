@@ -10,11 +10,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Semear',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: SemearColor,
-        ),
-        home: LoginPage());
+      title: 'Semear',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: SemearColor,
+      ),
+      home: LoginPage(),
+    );
   }
 }

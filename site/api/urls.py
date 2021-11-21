@@ -9,6 +9,7 @@ urlpatterns = [
     path('chamada/create/', chamada.create_chamada),
     path('chamada/update/', chamada.update_chamada),
     path('chamada/delete/', chamada.delete_chamada),
+    path('chamada/aluno/<str:oficina_id>/<str:aluno_id>/', chamada.get_chamada_by_aluno),
     path('chamada/<str:id_oficina>/<str:id>/', chamada.get_chamada_by_id),
     path('chamada/<str:id_oficina>/', chamada.get_chamada),
 
@@ -64,4 +65,5 @@ urlpatterns = [
 
     path('login_interno/', views.make_login_interno),
     path('login_aluno/', views.make_login_aluno),
+    path('validate/', views.validate_login),
 ]

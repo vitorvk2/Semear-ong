@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:semear/components/bootom_menu.dart';
 import 'package:semear/envs.dart';
+import 'package:semear/pages/chamada/chamada.dart';
 import 'package:semear/pages/oficina_detalhes/oficina_detalhes.service.dart';
 import 'package:semear/paletas/paleta.dart';
 
@@ -111,7 +114,15 @@ class _OficinaDetalhesPageState extends State<OficinaDetalhesPage> {
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          CupertinoPageRoute(
+                            builder: (ctx2) => ChamadaPage(
+                              oficinaId: widget.oficinaId,
+                            ),
+                          ),
+                        );
+                      },
                       child: Padding(
                         padding: const EdgeInsets.all(2.0),
                         child: Text(
@@ -129,43 +140,39 @@ class _OficinaDetalhesPageState extends State<OficinaDetalhesPage> {
                   ],
                 ),
                 Divider(color: Color(0x01000001)),
-                GridView.builder(
-                  shrinkWrap: true,
-                  primary: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5,
-                  ),
-                  itemBuilder: (BuildContext ctx, int index) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(9)),
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            url_semear + detalhes['imagens'][index],
-                          ),
-                          fit: BoxFit.cover,
+                detalhes.length > 0
+                    ? GridView.builder(
+                        shrinkWrap: true,
+                        primary: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 5,
+                          mainAxisSpacing: 5,
                         ),
-                      ),
-                    );
-                  },
-                  itemCount: detalhes['imagens'].length ?? 0,
-                ),
+                        itemBuilder: (BuildContext ctx, int index) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(9)),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  url_semear + detalhes['imagens'][index],
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          );
+                        },
+                        itemCount: detalhes['imagens'].length ?? 0,
+                      )
+                    : Container(),
               ],
             ),
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: SemearColor[400],
-        items: [
-          BottomNavigationBarItem(label: "pesquisar", icon: Icon(null)),
-          BottomNavigationBarItem(label: "a", icon: Icon(null)),
-          BottomNavigationBarItem(label: "a", icon: Icon(null)),
-        ],
-      ),
+      bottomNavigationBar: BottomMenuComponent(),
     );
   }
 }

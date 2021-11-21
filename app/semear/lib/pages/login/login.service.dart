@@ -57,6 +57,24 @@ Future checkLogin(BuildContext ctx) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   if ((prefs.getString('token') ?? '') != '') {
+    http.Response data = await http.post(
+      Uri.parse(
+        url_semear + "/api/validate/",
+      ),
+      headers: {
+        'Authorization': 'Bearer ' + (prefs.getString('token') ?? ''),
+        'validate': 'Bearer ' + (prefs.getString('validate') ?? '')
+      },
+    );
+
+    print(data.body);
+    print(data.statusCode);
+
+    if (data.statusCode != 200) {
+      // prefs.clear();
+      // return;
+    }
+
     Navigator.of(ctx).pushAndRemoveUntil(
       CupertinoPageRoute(builder: (ctx2) => HomePage()),
       (router) => false,
