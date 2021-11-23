@@ -105,6 +105,15 @@ class _OficinaDetalhesPageState extends State<OficinaDetalhesPage> {
                 Divider(
                   color: Color(0x01000001),
                 ),
+                Container(
+                  child: Text(
+                    "Descrição: " + (detalhes['descricao'] ?? '---'),
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                Divider(
+                  color: Color(0x01000001),
+                ),
                 Row(
                   children: [
                     Container(

@@ -240,7 +240,7 @@ def create_aluno_oficina(request: HttpRequest) -> JsonResponse:
             oficina = Oficinas.objects.get(id=data['oficina_id'])
 
         else:
-            oficina = Oficinas.objects.get(id=data['oficina_id'], orientador_id=request.id_user)
+            oficina = Oficinas.objects.get(id=data['oficina_id'])
 
         aluno = Alunos.objects.get(id=data['aluno_id'])
 
@@ -508,7 +508,7 @@ def get_oficinas_by_name(request: HttpRequest) -> JsonResponse:
         "orientador__user__nome",
         "created_at",
         "is_active",
-    )[:5]
+    )[:30]
 
     imagens = OficinaImagem.objects.filter(oficina_id__in=list(oficinas.values_list('id', flat=True))).values('oficina', 'img')
     imagens_dict = {}

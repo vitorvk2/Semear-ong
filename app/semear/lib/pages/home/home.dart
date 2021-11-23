@@ -2,10 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:semear/components/bootom_menu.dart';
 import 'package:semear/components/oficina_item.dart';
-import 'package:semear/envs.dart';
 import 'package:semear/pages/home/home.service.dart';
-import 'package:semear/pages/oficina_detalhes/oficina_detalhes.dart';
-import 'package:semear/paletas/paleta.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

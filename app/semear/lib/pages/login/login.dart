@@ -43,7 +43,9 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Divider(),
+                Divider(
+                  color: Color(0x01000001),
+                ),
                 TextField(
                   controller: password_ctrl,
                   obscureText: true,

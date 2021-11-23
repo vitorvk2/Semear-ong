@@ -92,6 +92,7 @@ class _PesquisaPageState extends State<PesquisaPage> {
                         isSubscribed: oficinasSubscribed.contains(
                           oficinasSearch[i]['id'],
                         ),
+                        subFun: subcribe,
                       );
                     },
                   ),

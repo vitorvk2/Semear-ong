@@ -1,14 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:semear/pages/oficina_detalhes/oficina_detalhes.dart';
+import 'package:semear/paletas/paleta.dart';
 
 import '../envs.dart';
 
 class OficinaItemComponent extends StatelessWidget {
-  OficinaItemComponent({required this.oficina, this.isSubscribed = true});
+  OficinaItemComponent({
+    required this.oficina,
+    this.isSubscribed = true,
+    this.subFun,
+  });
 
   final Map<String, dynamic> oficina;
   final bool isSubscribed;
+  final Function? subFun;
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +100,24 @@ class OficinaItemComponent extends StatelessWidget {
                           backgroundColor: Color(0xff020129),
                         ),
                       )
-                    : Container(),
+                    : TextButton(
+                        onPressed: () {
+                          subFun!(context, oficina);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: Text(
+                            "Inscrever-se",
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        style: TextButton.styleFrom(
+                          backgroundColor: SemearColor[50],
+                        ),
+                      ),
               ],
             ),
           ),
