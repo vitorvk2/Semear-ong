@@ -37,18 +37,24 @@ class LoginPage extends StatelessWidget {
                 TextField(
                   controller: user_ctrl,
                   decoration: InputDecoration(
-                      hintText: "Usuário",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(8)))),
+                    hintText: "Usuário",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                  ),
                 ),
-                Divider(),
+                Divider(
+                  color: Color(0x01000001),
+                ),
                 TextField(
                   controller: password_ctrl,
                   obscureText: true,
                   decoration: InputDecoration(
-                      hintText: "Senha",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(8)))),
+                    hintText: "Senha",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                  ),
                 ),
                 Divider(
                   color: Color(0x01000001),

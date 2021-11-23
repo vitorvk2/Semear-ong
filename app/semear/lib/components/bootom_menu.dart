@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:semear/pages/login/login.dart';
+import 'package:semear/pages/pesquisa/pesquisa.dart';
 import 'package:semear/paletas/paleta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,7 +9,9 @@ class BottomMenuComponent extends StatelessWidget {
   final colorLetters = Colors.black54;
 
   void openSearch(BuildContext context) {
-    print("a");
+    Navigator.of(context).push(
+      CupertinoPageRoute(builder: (BuildContext ctx) => PesquisaPage()),
+    );
   }
 
   void exitApp(BuildContext context) {
@@ -39,6 +42,7 @@ class BottomMenuComponent extends StatelessWidget {
             TextButton(
               onPressed: () async {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
+
                 prefs.clear();
 
                 Navigator.of(context).pushAndRemoveUntil(

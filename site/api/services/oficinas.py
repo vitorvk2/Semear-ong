@@ -1,4 +1,4 @@
-from api.dto.oficina import oficina_create_dto, oficina_aluno_create_dto, oficina_update_dto, oficina_delete_dto
+from api.dto.oficina import oficina_create_dto, oficina_aluno_create_dto, oficina_update_dto, oficina_delete_dto, oficina_search_dto
 from core.decorator import has_data_body, validate_dataclass, is_api_authenticated
 from oficinas.models import Oficinas, OficinaAluno, OficinaImagem
 from django.core.files.uploadedfile import InMemoryUploadedFile
@@ -240,7 +240,7 @@ def create_aluno_oficina(request: HttpRequest) -> JsonResponse:
             oficina = Oficinas.objects.get(id=data['oficina_id'])
 
         else:
-            oficina = Oficinas.objects.get(id=data['oficina_id'], orientador_id=request.id_user)
+            oficina = Oficinas.objects.get(id=data['oficina_id'])
 
         aluno = Alunos.objects.get(id=data['aluno_id'])
 
@@ -489,3 +489,42 @@ def get_oficina_aluno_detalhe_by_id(request: HttpRequest, id: str) -> JsonRespon
         }, 
         status=200
     )
+
+
+@csrf_exempt
+@require_http_methods(["POST"])
+@validate_dataclass(oficina_search_dto.SearchOficina)
+@has_data_body
+@is_api_authenticated
+def get_oficinas_by_name(request: HttpRequest) -> JsonResponse:
+    data = json.loads(request.body)
+
+    oficinas = Oficinas.objects.filter(nome__icontains=data['nome']).select_related("orientador").values(
+        "nome",
+        "id",
+        "descricao",
+        "horario",
+        "orientador__id",
+        "orientador__user__nome",
+        "created_at",
+        "is_active",
+    )[:30]
+
+    imagens = OficinaImagem.objects.filter(oficina_id__in=list(oficinas.values_list('id', flat=True))).values('oficina', 'img')
+    imagens_dict = {}
+
+    for i in imagens:
+        if i['oficina'] not in imagens_dict:
+            imagens_dict[i['oficina']] = []
+        imagens_dict[i['oficina']].append(i['img'])
+
+    oficinas = list(oficinas)
+
+    for index, i in enumerate(oficinas):
+        oficinas[index]['imagens'] = imagens_dict.get(i['id'], [])
+
+    return JsonResponse({
+        'success': True,
+        'oficinas': oficinas
+
+    }, status=200)
