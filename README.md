@@ -1,14 +1,12 @@
-# Projeto para ong Semear
+# Project for NGO Semear
 
-Este projeto pauta a criação de uma estrutura online para a ONG Semear de Marília-SP que necessita de uma organização dos seus alunos e orientadores de maneira prática e rápida. Para isso o projeto será feito com Django para parte Web e API e Flutter para mobile, no banco de dados utilizaremos o MySQL
+This project aims to create an online structure for the NGO Semear in Marília-SP, which requires an organized and efficient way to manage its students and mentors. For this purpose, the project will be developed using Django for the web and API components, and Flutter for the mobile application. MySQL will be used as the database.
 
+## Dependencies
 
-## Dependências
+To run the project, you need to have at least Python 3.6 and MySQL 5.7 installed. For the mobile application, Flutter 2.0.3 is required.
 
-Para usar rodar o projeto é necessário ter o Python no mínimo na versão 3.6 e MySQL 5.7 já no mobile Flutter 2.0.3
-
-
-## Install
+## Installation
 
 > MySQL:
 
@@ -16,15 +14,14 @@ Para usar rodar o projeto é necessário ter o Python no mínimo na versão 3.6 
 CREATE DATABASE semear;
 ```
 
-> Ambiente
+> Environment
 
-Linux (debian based):
+Linux (Debian-based):
 ```bash
 apt install python3-pip
 ```
 
-Windows e Macos já vem o pip instaldo
-
+Windows and macOS already come with pip installed.
 
 ```bash
 pip install virtualenv
@@ -35,12 +32,12 @@ cd .../site
 
 virtualenv -p python3 env
 
-. ./env/bin/active
+. ./env/bin/activate
 
 pip install -r requirements.txt
-````
+```
 
-Crie um arquivo ```.env``` com base no ```.env.example```, troque as informações da chave e rode 
+Create a `.env` file based on `.env.example`, update the key information, and run:
 
 ```bash
 python manage.py migrate
@@ -48,7 +45,7 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-O site vai iniciar na porta 8000 do localhost
+The website will start on port 8000 of the localhost.
 
 > Mobile
 
@@ -57,5 +54,6 @@ cd .../app/semear
 
 flutter pub get
 
-flutter run 
+flutter run
 ```
+
