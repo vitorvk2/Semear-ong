@@ -1,0 +1,527 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css");
+
+:root {
+    --primary: #FFB703;
+    --second: #020129;
+    --third: #FB8500;
+    --detail: #999999;
+    --fail: #D81159;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body, html {
+    min-height: 100vh;
+    overflow-x: hidden !important;
+}
+
+.red__text {
+    color: var(--fail);
+}
+
+.detail {
+    color: var(--detail);
+}
+
+a {
+    color: var(--second);
+    text-decoration: none;
+    transition: .3s ease-in-out;
+}
+
+.main__button {
+    cursor: pointer;
+    padding: 0 .75rem;
+    background-color: var(--primary);
+    border-radius: 6px;
+    height: 3rem;
+    border: none;
+    font-size: 1rem;
+    transition: 0.3s ease-in-out;
+}
+
+.main__button:focus {
+    background-color: var(--third);
+}
+
+.main__second__button {
+    color: white;
+    background-color: var(--second);
+}
+
+.main__fail__button {
+    color: white;
+    background-color: var(--fail);
+}
+
+div.is__line {
+    width: 7px;
+    height: 100px;
+    background-color: var(--second);
+    position: absolute;
+    right: 1rem;
+    top: 0;
+    border-radius: 1rem;
+}
+
+div.grid__1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: .5rem;
+}
+
+div.grid__2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .5rem;
+}
+
+div.grid__3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: .5rem;
+}
+
+div.grid__4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: .5rem;
+}
+
+div.grid__5 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: .5rem;
+}
+
+div.home__content__page {
+    background-color: #f6f7ff;
+    padding: 1rem;
+    padding-left: 3rem;
+}
+
+div.home__content {
+    padding: 1rem;
+    padding-left: 3rem;
+    position: relative;
+}
+
+div.home__content h1 {
+    font-size: 3.5rem;
+}
+
+p.sub {
+    font-size: 1rem;
+    color: var(--detail);
+}
+
+div.home__content .main__button {
+    margin-top: 6rem;
+}
+
+div.yellow__img {
+    background: var(--primary);
+    height: 100vh;
+    width: 50vw;
+}
+
+div.yellow__img div.image {
+    background-image: url('/static/img/family.jpg');
+    width: 100%;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    opacity: .7;
+}
+
+div.login__main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+div.login__main form {
+    width: 30vw;
+}
+
+select.input {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 5rem;
+}
+
+input.input, select.input, textarea.input {
+    cursor: pointer;
+    border: 1px solid var(--second);
+    transition: .3s ease-in;
+    padding: .5rem;
+    height: 3rem;
+    color: var(--second);
+    margin-bottom: .75rem;
+    border-radius: 6px;
+}
+
+input.input:hover,
+select.input:hover, 
+textarea.input:hover,
+input.input:focus,
+select.input:focus, 
+textarea.input:focus {
+    box-shadow: inset 0px 0px 0px 1.5px var(--second);
+}
+
+div.input__hero {
+    position: relative;
+}
+
+div.checkbox__input {
+    cursor: pointer;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--detail);
+    transition: .3s ease-in-out;
+    position: relative;
+}
+
+div.checkbox__input:hover {
+    border: 2px solid var(--second);
+}
+
+div.checkbox__input::after {
+    content: '';
+    display: block;
+    opacity: 0;
+    position: absolute;
+    transform: rotate(45deg);
+    width: .4rem;
+    height: .9rem;
+    border-right: 3px solid var(--second);
+    border-bottom: 3px solid var(--second);
+    left: 30%;
+    transition: 0.2s ease-in-out;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"]:checked ~ div.checkbox__input {
+    background-color: var(--primary);
+}
+
+input[type="checkbox"]:checked ~ div.checkbox__input::after {
+    opacity: 1;
+}
+
+div.input__hero input, div.input__hero select, div.input__hero textarea {
+    width: 100%;
+}
+
+div.input__hero label.forced {
+    color: var(--second);
+    font-size: .9rem;
+}
+
+div.input__hero input:focus ~ label, div.input__hero input:not(:placeholder-shown) ~ label, 
+div.input__hero select:focus ~ label, div.input__hero select:not(:placeholder-shown) ~ label, 
+div.input__hero textarea:focus ~ label, div.input__hero textarea:not(:placeholder-shown) ~ label {
+    top: -0.5rem;
+    font-size: .75rem;
+    background-color: white;
+    padding: 0 .25rem;
+    font-weight: 600;
+    color: var(--second);
+}
+
+div.input__hero label {
+    position: absolute;
+    left: .5rem;
+    top: 17%;
+    color: var(--detail);
+    transition: 0.1s ease-in;
+}
+
+nav.menu {
+    width: 17vw;
+    height: 100vh;
+    background-color: var(--primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1.5rem;
+    padding-left: 1.5rem;
+    position: fixed;
+    transition: .3s ease-in-out;
+    z-index: 5;
+}
+
+div.icon__menu {
+    cursor: pointer;
+    font-size: 2rem;
+    display: none;
+}
+
+nav.menu h1 {
+    font-size: 2rem;
+}
+
+nav.menu ul {
+    margin-top: 4rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+}
+
+nav.menu .is__line {
+    left: 1.4rem;
+    right: auto !important;
+    height: 100vh;
+}
+
+nav.menu ul li {
+    cursor: pointer;
+    list-style: none;
+    width: 100%;
+    transition: 0.2s ease-in;
+    line-height: 3rem;
+    padding-left: .5rem;
+    font-size: 1.3rem;
+}
+
+nav ul li.active {
+    background-color: var(--second);
+    color: white;
+    padding-left: 1.5rem;
+}
+
+nav.menu ul li:hover {
+    background-color: var(--second);
+    color: white;
+    padding-left: 1.5rem;
+}
+
+nav.menu li.exit {
+    margin-top: auto;
+}
+
+div.app {
+    display: flex;
+    flex-direction: row;
+}
+
+div.app main {
+    padding: 1.7rem;
+    width: 83vw;
+    margin-left: 17vw;
+}
+
+main div.actions {
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+}
+
+main div.actions div.input__hero {
+    width: 7rem;
+}
+
+main div.content {
+    margin-top: 2rem;
+}
+
+main div.content div.card__grid__list {
+    gap: .5rem;
+}
+
+div.card__grid {
+    background: var(--third);
+    border-radius: 10px;
+}
+
+div.card__grid header.header__card__grid {
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+    font-size: 1.125rem;
+}
+
+div.img__crop {
+    width: 100%;
+    height: 10rem;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #3b398860;
+}
+
+div.img__crop img {
+    width: 100%;
+}
+
+div.card__grid header.header__card__grid span.orientador__name {
+    color: white;
+    font-weight: 600;
+}
+
+div.card__grid header.header__card__grid p.desc {
+    font-size: .8rem;
+}
+
+div.card__grid div.content__card__grid {
+    padding: 1rem;
+}
+
+div.card__grid div.content__card__grid p {
+    font-size: .9rem;
+}
+
+div.card__grid div.content__card__grid span {
+    color: white;
+    line-height: .5;
+    font-size: .9rem;
+}
+
+div.tales span.detail {
+    color: var(--detail);
+}
+
+table tr, table td {
+    min-height: 40px;
+    line-height: 40px;
+}
+
+td.iftable {
+    padding-left: 3rem;
+}
+
+table.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table.table thead td {
+    font-weight: 600;
+    border-bottom: 1px solid var(--detail);
+
+}
+
+table.table td select {
+    background: none !important;
+}
+
+table.table td {
+    padding: .5rem;
+    border-left: 1px solid var(--detail);
+    border-right: 1px solid var(--detail);
+}
+
+table.table tr:nth-child(even) {
+    background-color: #e7e7e7;
+}
+
+@media only screen and (max-width: 1160px) {
+    nav.menu h1 {
+        font-size: 1.4rem !important;
+    }
+
+    nav.menu li {
+        font-size: 1rem !important;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    nav.menu {
+        width: 22vw !important;
+    }
+
+    main {
+        width: 78vw !important;
+        margin-left: 22vw !important;
+    }
+
+    table {
+        display: block !important;
+        overflow-x: scroll !important;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    nav.menu {
+        width: 70px !important;
+        padding-left: 0 !important;
+    }
+
+    nav.menu.active {
+        width: 100vw !important;
+    }
+
+    nav.menu.active ul {
+        display: block !important;
+    }
+
+    nav.menu.active h1 {
+        display: block !important;
+    }
+
+    nav.menu div.icon__menu {
+        display: block;
+    }
+
+    nav.menu h1 {
+        display: none !important;
+    }
+
+    nav.menu div.is__line {
+        display: none !important;
+    }
+
+    nav.menu ul {
+        display: none !important;
+    }
+
+    main {
+        width: calc(100% - 70px) !important;
+        margin-left: 70px !important;
+    }
+
+    div.grid__4 {
+        grid-template-columns: 1fr 1fr 1fr !important;
+    }
+
+    table td, table th {
+        font-size: .85rem !important;
+    }
+}
+
+@media only screen and (max-width: 580px) {
+    div.grid__3, div.grid__4 {
+        grid-template-columns: 1fr 1fr !important;
+    }
+
+    table td, table th {
+        font-size: .7rem !important;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    div.grid__2, div.grid__3, div.grid__4 {
+        grid-template-columns: 1fr !important;
+    }
+}

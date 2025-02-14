@@ -20,8 +20,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         ]
     )
 
-    nome = models.CharField(max_length=200)
-    cpf = models.CharField(max_length=15, unique=True)
+    nome = models.CharField(max_length=200, db_index=True)
+    cpf = models.CharField(max_length=15, unique=True, db_index=True)
     data_nasc = models.DateField()
     endereco = models.CharField(max_length=200)
     bairro = models.CharField(max_length=200)

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block app %}
+    <input type="hidden" value="{{id}}" hidden id="uid">
+    <div class="tales">
+        <h1>Cadastrar</h1>
+        <br>
+        <div class="status"></div>
+    </div>
+    <div class="content">
+        <form>
+            <div class="form-group">
+                <div class="input__hero">
+                    <input class="input" id="nome" type="text" name="nome" placeholder=" ">
+                    <label for="nome">Nome</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input__hero">
+                    <input class="input" id="cpf" type="number" name="cpf" placeholder=" ">
+                    <label for="cpf">CPF</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input__hero">
+                    <input class="input" id="date" type="date" name="data_nasc" placeholder=" ">
+                    <label for="date">Data Nascimento</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input__hero">
+                    <input type="text" class="input" id="inputs" name="numero"  required placeholder=" ">
+                    <label for="inputs">Numero de Telefone</label>
+                </div>
+            </div>
+            <br>
+            <button class="main__button" type="button" id="create">
+                Criar
+            </button>
+        </form>
+    </div>
+{% endblock app %}
+
+{% block script %}
+    <script src="/static/js/aluno/responsavel_create.js"></script>
+{% endblock script %}

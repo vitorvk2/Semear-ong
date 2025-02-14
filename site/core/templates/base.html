@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semear</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+    <input type="hidden" hidden value="{{ admin }}" id="adm__ff">
+    
+    <div class="app">
+        <div class="is__line"></div>
+        <nav class="menu">
+            <div class="is__line"></div>
+            <div class="icon__menu" onclick="toggle_menu()">
+                <i class="fas fa-bars"></i>
+            </div>
+            <h1>
+                Semear
+            </h1>
+            <ul>
+                <a href="/oficinas/list/">
+                    <li {% if active == 'oficinas' %}class="active"{% endif %}>Oficinas</li>
+                </a>
+                <a href="/alunos/list/">
+                    <li {% if active == 'alunos' %}class="active"{% endif %}>Alunos</li>
+                </a>
+                {% if admin %}
+                    <a href="/alunos/responsavel/list/">
+                        <li {% if active == 'resp' %}class="active"{% endif %}>Responsáveis</li>
+                    </a>
+                    <a href="/orientador/listagem/">
+                        <li {% if active == 'orientador' %}class="active"{% endif %}>Orientadores</li>
+                    </a>
+                {% endif %}
+                <li class="exit" onclick="logout()">Sair</li>
+            </ul> 
+        </nav>
+        <main>
+            {% block app %}
+            {% endblock app %}
+        </main>
+    </div>
+
+    <script src="/static/js/api_auth.js"></script>
+    {% block script %}
+    {% endblock script %}
+</body>
+</html>

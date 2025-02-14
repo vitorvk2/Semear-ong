@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block app %}
+    <input type="hidden" value="{{id}}" hidden id="uid">
+    <div class="tales">
+        <h1>Cadastrar</h1>
+        <br><div class="status"></div>
+    </div>
+    <div class="content">
+        <form>
+            <div class="form-group">
+                <div class="input__hero">
+                    <input class="input" type="text" name="responsavel">
+                    <small id="sIDRespReg"></small>
+                    <label>ID Responsavel</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input__hero">
+                    <input class="input" type="text" name="username">
+                    <small id="sUserReg"></small>
+                    <label>Username: </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input__hero">
+                    <input class="input" type="text" name="nome">
+                    <small id="sNomeReg"></small>
+                    <label>Nome: </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input__hero">
+                    <input class="input" type="number" name="cpf">
+                    <small id="sCPFReg"></small>
+                    <label>CPF</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input__hero">
+                    <input class="input" type="date" name="data_nasc">
+                    <small id="sDataReg"></small>
+                    <label>Data Nascimento</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input__hero">
+                    <input class="input" type="password" name="password">
+                    <small id="sSenhaReg"></small>
+                    <label>Senha: </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input__hero">
+                    <input class="input" type="password" name="confirmPassword">
+                    <small id="sConfSenhaReg"></small>
+                    <label>Confirmar Senha: </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input__hero">
+                    <input type="number" class="input" id="inputs" name="cep" onfocusout="buscarCep(event)" required>
+                    <small id="sCepReg"></small>
+                    <label for="floatingInput">CEP</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input__hero">
+                    <input type="text" class="input" id="inputs" name="logradouro"  required>
+                    <small id="sLogReg"></small>
+                    <label for="floatingInput">Logradouro</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input__hero">
+                    <input type="number" class="input" id="inputs" name="numero"  required>
+                    <small id="sNumReg"></small>
+                    <label for="floatingInput">Numero</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input__hero">
+                    <input type="text" class="input" id="inputs" name="bairro" required>
+                    <small id="sBaiReg"></small>
+                    <label for="floatingInput">Bairro</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input__hero">
+                    <input type="text" class="input" id="inputs" name="cidade" required>
+                    <small id="sCidReg"></small>
+                    <label for="floatingInput">Cidade</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input__hero">
+                    <input type="text" class="input" id="inputs" name="uf" required>
+                    <small id="sUfReg"></small>
+                    <label for="floatingInput">UF</label>
+                </div>
+            </div>
+            <br>
+            <button class="main__button" type="button" id="create">
+                Criar
+            </button>
+        </form>
+    </div>
+{% endblock app %}
+
+{% block script %}
+    <script src="/static/js/aluno/aluno_create.js"></script>
+{% endblock script %}

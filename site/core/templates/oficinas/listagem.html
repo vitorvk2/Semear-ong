@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block app %}
+    <div class="tales">
+        <h1>Oficinas</h1>
+        <br>
+        <div class="actions">
+            <div class="input__hero">
+                <!-- <select class="input">
+                    <option value="1" selected>Ativas</option>
+                    <option value="0">Inativas</option>
+                </select> -->
+                <!-- <label for="user">Status</label> -->
+            </div>
+            {% if admin %}
+                <a href="/oficinas/create/"><button class="main__button">Criar</button></a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="content">
+        <div class="grid__3 card__grid__list"></div>
+    </div>
+{% endblock app %}
+
+{% block script %}
+    <script src="/static/js/oficinas/oficinas_listagem.js"></script>
+{% endblock script %}

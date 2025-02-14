@@ -1,0 +1,872 @@
+{
+	"info": {
+		"_postman_id": "0c294d24-a539-49eb-b333-66fb9258937e",
+		"name": "Semear",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Orientador ",
+			"item": [
+				{
+					"name": "Criar orientador",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"voluntario\": true,\n    \"username\": \"semear_test\",\n    \"nome\": \"Semear\",\n    \"senha\": \"12345678\",\n    \"cpf\": \"12345678901\",\n    \"data_nasc\": \"2000-10-10\",\n    \"endereco\": \"Rua de teste\",\n    \"bairro\": \"Santa\",\n    \"cidade\": \"Santa\",\n    \"numero\": 123,\n    \"uf\": \"SP\",\n    \"cep\": 17500400\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_semear}}/api/orientador/create/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"orientador",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar orientadores",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_semear}}/api/orientador/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"orientador",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar orientador",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"voluntario\": false,\n    \"data_nasc\": \"2000-10-10\",\n    \"endereco\": \"Rua de teste\",\n    \"bairro\": \"Santa\",\n    \"cidade\": \"Santa\",\n    \"numero\": 123,\n    \"uf\": \"SP\",\n    \"cep\": 17500400\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_semear}}/api/orientador/update/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"orientador",
+								"update",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detalhar um orientador",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_semear}}/api/orientador/1/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"orientador",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remover orientador",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_semear}}/api/orientador/delete/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"orientador",
+								"delete",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Oficina",
+			"item": [
+				{
+					"name": "Criar oficina",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"aluno_id\": 1,\n    \"oficina_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_semear}}/api/oficinas/create/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"oficinas",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar oficinas",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_semear}}/api/oficinas/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"oficinas",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detalhar uma oficina",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_semear}}/api/oficinas/1/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"oficinas",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar oficina",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"nome\": \"teste\",\n    \"descricao\": \"after update\",\n    \"horario_aula\": \"10:00\",\n    \"local\": \"casa\",\n    \"link\": \"https://meet.google.com/odr-ravo-gdr\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_semear}}/api/oficinas/update/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"oficinas",
+								"update",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remover oficina",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_semear}}/api/oficinas/delete/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"oficinas",
+								"delete",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Aluno",
+			"item": [
+				{
+					"name": "Listar alunos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_semear}}/api/aluno/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"aluno",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detalhar um aluno",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_semear}}/api/aluno/1/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"aluno",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remover aluno",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_semear}}/api/aluno/delete/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"aluno",
+								"delete",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar aluno",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"responsavel\": 1,\n    \"username\": \"aluno_test\",\n    \"nome\": \"teste\",\n    \"senha\": \"12345678\",\n    \"cpf\": \"12345678910\",\n    \"data_nasc\": \"2000-10-10\",\n    \"endereco\": \"Rua X\",\n    \"bairro\": \"BXa\",\n    \"cidade\": \"Marília\",\n    \"numero\": 123,\n    \"uf\": \"SP\",\n    \"cep\": 123\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_semear}}/api/aluno/create/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"aluno",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar aluno",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"data_nasc\": \"2000-10-10\",\n    \"endereco\": \"Rua X\",\n    \"bairro\": \"BXa\",\n    \"cidade\": \"Marília\",\n    \"numero\": 123,\n    \"uf\": \"SP\",\n    \"cep\": 123\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_semear}}/api/aluno/update/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"aluno",
+								"update",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Responsável",
+			"item": [
+				{
+					"name": "Detalhar responsável",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_semear}}/api/responsavel/1/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"responsavel",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar responsável",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"teste\",\n    \"cpf\": \"12445678919\",\n    \"data_nasc\": \"2000-10-10\",\n    \"tel\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_semear}}/api/responsavel/create/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"responsavel",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chamada",
+			"item": [
+				{
+					"name": "Listar chamadas por oficina",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_semear}}/api/chamada/1/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"chamada",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detalhar chamada",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_semear}}/api/chamada/1/1/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"chamada",
+								"1",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar chamada",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descricao\": \"Teste\",\n    \"oficina\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_semear}}/api/chamada/create/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"chamada",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remover chamada",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_semear}}/api/chamada/delete/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"chamada",
+								"delete",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar chamada",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "validate",
+								"value": "Bearer {{validate}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descricao\": \"Teste\",\n    \"id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_semear}}/api/chamada/update/",
+							"host": [
+								"{{url_semear}}"
+							],
+							"path": [
+								"api",
+								"chamada",
+								"update",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login orientador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\", jsonData.token);",
+							"postman.setEnvironmentVariable(\"validate\", jsonData.validate);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"semear_test\",\n    \"password\": \"12345678\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_semear}}/api/login_interno/",
+					"host": [
+						"{{url_semear}}"
+					],
+					"path": [
+						"api",
+						"login_interno",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

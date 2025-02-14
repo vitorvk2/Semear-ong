@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block app %}
+    <input type="hidden" value="{{id}}" hidden id="uid">
+    <div class="tales">
+        <h1>Chamadas</h1>
+        <br>
+        <div class="actions">
+            <div></div>
+            <a href="/chamada/{{id}}/create/">
+                <button class="main__button">Criar</button>
+            </a>
+        </div>
+    </div>
+    <div class="content">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Descrição</td>
+                    <td>Criado em</td>
+                    <td>Ações</td>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+{% endblock app %}
+
+{% block script %}
+    <script src="/static/js/chamadas/chamadas_listagem.js"></script>
+{% endblock script %}

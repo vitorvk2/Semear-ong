@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block app %}
+    <div class="tales" onload="buscarelemento(event, 1)">
+        <h1>Alunos</h1><br>
+        <a href="/alunos/create/"><button class="main__button">Criar</button></a>
+    </div>
+    <div class="content"  >
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Nome</td>
+                    <td>Endereço</td>
+                    <td>Inscrição</td>
+                    <td>Ações</td>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+{% endblock app %}
+
+{% block script %}
+    <script src="/static/js/aluno/aluno_listagem.js"></script>
+{% endblock script %}
